@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\BarangController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\BahanController;
 use App\Http\Controllers\admin\GenderController;
+use App\Http\Controllers\admin\UkuranController;
 use App\Models\Barang;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,7 @@ Route::resources([
      'admin' => AdminController::class,
      'bahan' => BahanController::class,
      'gender' => GenderController::class,
+     'ukuran' => UkuranController::class,
     
      
 ]);
