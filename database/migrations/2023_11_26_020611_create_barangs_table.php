@@ -15,7 +15,7 @@ return new class extends Migration
             $table->integerIncrements('id_barang')->primary()->unique();
             $table->string('nama_barang')->nullable();
             $table->integer('jumlah_stok')->nullable();
-            $table->date('tanggal_masuk')->nullable();
+            // $table->date('tanggal_masuk')->nullable();
             $table->string('gambar_barang')->nullable();
             $table->timestamps();
         });

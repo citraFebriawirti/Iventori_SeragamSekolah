@@ -18,8 +18,8 @@ class BarangController extends Controller
     public function index()
     {
         $nomor = 1;
-        $data = Barang::get();
-        return view('Pages.Admin.Barang.index', ['no' => $nomor, 'data' => $data]);
+        $data = Barang::OrderBy('id_barang','Desc')->get();
+        return view('pages.halaman_admin.kelola_barang.index', ['no' => $nomor, 'data' => $data]);
 
         // return view('Pages.Admin.Barang.index');
     }
@@ -29,7 +29,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        return view('Pages.Admin.Barang.create');
+        return view('pages.halaman_admin.kelola_barang.create');
     }
 
     /**
@@ -39,7 +39,6 @@ class BarangController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_barang' => 'required',
-            'tanggal_masuk' => 'required',
             'jumlah_stok' => 'required',
             'gambar_barang' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Add validation for image file
         ]);
@@ -63,7 +62,6 @@ class BarangController extends Controller
 
         $data = new Barang;
         $data->nama_barang = $request->nama_barang;
-        $data->tanggal_masuk = $request->tanggal_masuk;
         $data->jumlah_stok = $request->jumlah_stok;
         $data->gambar_barang = $tujuan_upload . $nama_file;
         $data->save();
@@ -79,7 +77,7 @@ class BarangController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return 'show';
     }
 
     /**
@@ -88,26 +86,20 @@ class BarangController extends Controller
     public function edit(string $id)
     {
         $data = Barang::where('id_barang', $id)->first();
-        return view('Pages.Admin.Barang.edit', ['data' => $data]);
+        return view('pages.halaman_admin.kelola_barang.edit', ['data' => $data]);
     }
 
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'nama_barang' => 'required',
-            'tanggal_masuk' => 'required',
             'jumlah_stok' => 'required',
             'gambar_barang' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Update validation for image file
         ]);
 
-        // if ($validator->fails()) {
-        //     return redirect('/barang/' . $id . '/edit')
-        //         ->withErrors($validator)
-        //         ->withInput();
-        // }
 
         $data = Barang::where('id_barang', $id)->first();
-        
+
 
         if (!$data) {
             return redirect('/barang')->with('error', 'Barang not found');
@@ -121,13 +113,21 @@ class BarangController extends Controller
             $tujuan_upload = 'images/gambar_barang/';
             $file->move($tujuan_upload, $nama_file);
 
-            $data->gambar_barang = $tujuan_upload . $nama_file;
+            $gambar_barang = $tujuan_upload . $nama_file;
+        } else {
+            $gambar_barang = $data->gambar_barang;
         }
-        
-        
 
-        if ($data->save()) {
-            return "berhasil";
+        $updateBarang = Barang::where('id_barang', $id)->update([
+            'nama_barang' => $request->nama_barang,
+            'jumlah_stok' => $request->jumlah_stok,
+            'gambar_barang' => $gambar_barang,
+        ]);
+
+
+
+        if ($updateBarang) {
+            return redirect('/barang');
         } else {
             return "gagal";
         }
@@ -139,7 +139,7 @@ class BarangController extends Controller
     public function destroy(string $id)
     {
         $data = Barang::where('id_barang', $id)->first();
-        storage::delete("public/assets_admin/fotobarang/$data->gambar_barang");
+        storage::delete("images/gambar_barang/$data->gambar_barang");
         Barang::where('id_barang', $id)->delete();
         return redirect('/barang');
     }
