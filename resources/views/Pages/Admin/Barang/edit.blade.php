@@ -3,7 +3,7 @@
 <div>
     <div>
         <h1>Form Ubah Data</h1>
-        <form action="/barang/{{$data->id_barang}}" method="post">
+        <form action="{{route('barang.update',$data->id_barang)}}" method="post" enctype="multipart/form-data">
         @csrf 
         @method('PUT')
         </div>
@@ -22,7 +22,7 @@
         <div class="mb-3 row">
             <label for="" class="col-sm-2 col-form-label">Jumlah Stok</label>
             <div class="col-sm-10">
-                <input type="integer" class="form-control" name="jumlah_stok" value="{{$data->jumlah_stok}}" required>
+                <input type="number" class="form-control" name="jumlah_stok" value="{{$data->jumlah_stok}}" required>
             </div>
         </div>
         <div class="mb-3 row">

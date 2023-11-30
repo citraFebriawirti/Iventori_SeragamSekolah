@@ -18,7 +18,6 @@
     <table class="table table-bordered table-hover">
      <tr>
          <td style="width: 10px">No</td>
-         <td class="text-center fw-semibold">Kode Barang</td>
          <td class="text-center fw-semibold">Nama Barang</td>
          <td class="text-center fw-semibold">Tanggal Masuk</td>
          <td class="text-center fw-semibold">Jumlah Stok</td>
@@ -28,11 +27,12 @@
      @foreach ($data as $baris)
     <tr>
      <td>{{$no++}}</td>
-     <td>{{$baris->id_barang}}</td>
      <td>{{$baris->nama_barang}}</td>
      <td>{{$baris->tanggal_masuk}}</td>
      <td>{{$baris->jumlah_stok}}</td>
-     <td>{{$baris->gambar_barang}}</td>
+     
+    
+     <td class="w-25 text-center align-middle"><img src="{{ asset("$baris->gambar_barang") }}" class="img-thumbnail w-50 mx-auto p-3" ></td>
      <td class="text-center">
         <a href="/barang/{{$baris->id_barang}}/edit" data-bs-title="Ubah Data"><button type="submit" class="btn btn-warning btn-sm">Ubah</button></a>
 

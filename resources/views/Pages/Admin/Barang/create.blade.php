@@ -2,7 +2,7 @@
 @section('content')
 <div>
     <h1>Form Tambah Data</h1>
-    <form action="/barang" method="post">
+    <form action="/barang" method="post" enctype="multipart/form-data">
     @csrf 
 
     <div class="mb-3 row">
@@ -22,14 +22,15 @@
     <div class="mb-3 row">
         <label for="" class="col-sm-2 cool-form-lavel">Jumlah Stok</label>
         <div class="col-sm-10">
-            <input type="integer" class="form-control" name="jumlah_stok" required>
+            <input type="number" class="form-control" name="jumlah_stok" required>
         </div>
 
     </div>
     <div class="mb-3 row">
         <label for="" class="col-sm-2 cool-form-lavel">Gambar</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="gambar_barang" required>
+            <input type="file" class="form-control" name="gambar_barang" required>
+
         </div>
 
     </div>
