@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\BarangController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Models\Barang;
@@ -20,5 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('dashboard', DashboardController::class);
-Route::resource('barang', BarangController::class);
+
+Route::resources([
+    'dashboard' => DashboardController::class,
+    'barang' => BarangController::class,
+    // 'ekspedisi' => EkspedisiController::class,
+     'admin' => AdminController::class,
+]);

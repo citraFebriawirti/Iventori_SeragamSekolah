@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tb_barang', function (Blueprint $table) {
-            $table->integer('id_barang')->primary();
-            $table->string('nama_barang')->nullable();
-            $table->integer('jumlah_stok')->nullable();
-            // $table->date('tanggal_masuk')->nullable();
-            $table->string('gambar_barang')->nullable();
+        Schema::create('tb_admin', function (Blueprint $table) {
+            $table->string('id_admin')->primary()->unique();
+            $table->string('nama_admin')->nullable();
+            $table->text('alamat_admin')->nullable();
+            $table->string('no_hp_admin')->nullable();
+            $table->string('gambar_admin')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tb_barang');
+        Schema::dropIfExists('tb_admin');
     }
 };
