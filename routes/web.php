@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\admin\BarangController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Models\Barang;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('dashboard', DashboardController::class);
+Route::resource('barang', BarangController::class);
