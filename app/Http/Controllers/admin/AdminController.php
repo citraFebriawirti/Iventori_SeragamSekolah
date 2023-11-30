@@ -14,7 +14,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        
+
         $data['admin'] = DB::table('tb_admin')->get();
 
         return view('pages.halaman_admin.kelola_admin.index', $data);
@@ -52,7 +52,7 @@ class AdminController extends Controller
             $path = 'images/gambar_admin/';
             $request->file('gambar_admin')->move($path, $request->file('gambar_admin')->getClientOriginalName());
 
-            $gambar_admin= $path . $request->file('gambar_admin')->getClientOriginalName();
+            $gambar_admin = $path . $request->file('gambar_admin')->getClientOriginalName();
         } else {
 
             return back()->with('error', 'Gambar harus diisi');
@@ -122,7 +122,7 @@ class AdminController extends Controller
             $gambar_admin = $dataById->gambar_admin;
         }
 
-        $update = admin::where('id_admin', '=', $id)->update([
+        $update = Admin::where('id_admin', '=', $id)->update([
             'nama_admin' => $request->nama_admin,
             'alamat_admin' => $request->alamat_admin,
             'no_hp_admin' => $request->no_hp_admin,

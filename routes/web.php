@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\BarangController;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\BahanController;
 use App\Models\Barang;
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +28,7 @@ Route::resources([
     'barang' => BarangController::class,
     // 'ekspedisi' => EkspedisiController::class,
      'admin' => AdminController::class,
+     'bahan' => BahanController::class,
+    
+     
 ]);
