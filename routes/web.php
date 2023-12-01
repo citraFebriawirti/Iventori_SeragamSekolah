@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\BarangController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\BahanController;
+use App\Http\Controllers\admin\BarangKeluarController;
 use App\Http\Controllers\admin\BarangMasukController;
 use App\Http\Controllers\admin\GenderController;
 use App\Http\Controllers\admin\UkuranController;
@@ -35,6 +36,7 @@ Route::resources([
      'gender' => GenderController::class,
      'ukuran' => UkuranController::class,
      'barang_masuk' => BarangMasukController::class,
+     'barang_keluar' => BarangKeluarController::class,
     
      
 ]);
