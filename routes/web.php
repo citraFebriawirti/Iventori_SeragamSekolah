@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\BusanaController;
 use App\Http\Controllers\admin\EkspedisiController;
 use App\Http\Controllers\admin\GenderController;
 use App\Http\Controllers\admin\JenisController;
+use App\Http\Controllers\admin\KategoriController;
 use App\Http\Controllers\admin\UkuranController;
 use App\Models\Barang;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,7 @@ Route::resources([
      'ekspedisi' => EkspedisiController::class,
      'busana' => BusanaController::class,
      'jenis' => JenisController::class,
+     'kategori' => KategoriController::class,
     
      
 ]);
