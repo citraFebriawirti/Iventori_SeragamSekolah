@@ -52,8 +52,8 @@
             <table id="example" class="display border border-slate-200" style="width:100%">
                 <thead>
                     <tr>
-                        <th class="border border-slate-200 text-center">No</th>
-                        <th class="border border-slate-200 text-center">Nama</th>
+                        <th class="border border-slate-200 text-center w-1">No</th>
+                        <th class="border border-slate-200 text-center ">Nama</th>
                         <th class="border border-slate-200  text-center w-40">Aksi</th>
 
                     </tr>

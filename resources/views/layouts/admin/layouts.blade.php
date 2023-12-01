@@ -127,26 +127,26 @@
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/login.html">Data Kategori</a>
+                    <a class="w-full" href="{{route('kategori.index')}}">Data Kategori</a>
                   </li>
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/create-account.html">
+                    <a class="w-full" href="{{route('gender.index')}}">
                      Data Gender
                     </a>
                   </li>
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/forgot-password.html">
+                    <a class="w-full" href="{{route('model.index')}}">
                      Data Model
                     </a>
                   </li>
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/404.html">Data Busana</a>
+                    <a class="w-full" href="{{route('busana.index')}}">Data Busana</a>
                   </li>
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -161,7 +161,7 @@
                 <li
                 class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
               >
-                <a class="w-full" href="pages/blank.html">Data Jenis</a>
+                <a class="w-full" href="{{route('jenis.index')}}">Data Jenis</a>
               </li>
               <li
               class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -221,12 +221,12 @@
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/login.html">Data Barang Masuk</a>
+                    <a class="w-full" href="{{route('barang_masuk.index')}}">Data Barang Masuk</a>
                   </li>
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/create-account.html">
+                    <a class="w-full" href="{{route('barang_keluar.index')}}">
                      Data Barang Keluar
                     </a>
                   </li>
@@ -259,7 +259,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="cards.html"
+                href="{{route('ekspedisi.index')}}"
               >
                 <svg
                   class="w-5 h-5"
