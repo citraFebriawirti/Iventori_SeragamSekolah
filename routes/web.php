@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\BahanController;
 use App\Http\Controllers\admin\BarangKeluarController;
 use App\Http\Controllers\admin\BarangMasukController;
+use App\Http\Controllers\admin\EkspedisiController;
 use App\Http\Controllers\admin\GenderController;
 use App\Http\Controllers\admin\UkuranController;
 use App\Models\Barang;
@@ -37,6 +38,7 @@ Route::resources([
      'ukuran' => UkuranController::class,
      'barang_masuk' => BarangMasukController::class,
      'barang_keluar' => BarangKeluarController::class,
+     'ekspedisi' => EkspedisiController::class,
     
      
 ]);
