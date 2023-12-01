@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\BahanController;
 use App\Http\Controllers\admin\BarangKeluarController;
 use App\Http\Controllers\admin\BarangMasukController;
+use App\Http\Controllers\admin\BusanaController;
 use App\Http\Controllers\admin\EkspedisiController;
 use App\Http\Controllers\admin\GenderController;
 use App\Http\Controllers\admin\UkuranController;
@@ -31,7 +32,6 @@ Route::get('/', function () {
 Route::resources([
     'dashboard' => DashboardController::class,
     'barang' => BarangController::class,
-    // 'ekspedisi' => EkspedisiController::class,
      'admin' => AdminController::class,
      'bahan' => BahanController::class,
      'gender' => GenderController::class,
@@ -39,6 +39,7 @@ Route::resources([
      'barang_masuk' => BarangMasukController::class,
      'barang_keluar' => BarangKeluarController::class,
      'ekspedisi' => EkspedisiController::class,
+     'busana' => BusanaController::class,
     
      
 ]);
