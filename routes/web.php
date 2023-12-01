@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\EkspedisiController;
 use App\Http\Controllers\admin\GenderController;
 use App\Http\Controllers\admin\JenisController;
 use App\Http\Controllers\admin\KategoriController;
+use App\Http\Controllers\admin\ModelController;
 use App\Http\Controllers\admin\UkuranController;
 use App\Models\Barang;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,7 @@ Route::resources([
      'busana' => BusanaController::class,
      'jenis' => JenisController::class,
      'kategori' => KategoriController::class,
+     'model' => ModelController::class,
     
      
 ]);
