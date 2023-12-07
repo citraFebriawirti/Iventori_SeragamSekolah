@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barang;
 use App\Models\BarangMasuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,7 @@ class BarangMasukController extends Controller
      */
     public function index()
     {
-        $data['barang_masuk'] = DB::table('tb_barang_masuk')->get();
+        $data['barang_masuk'] = DB::table('tb_barang_masuk')->join('tb_barang', 'tb_barang_masuk.id_barang', '=', 'tb_barang.id_barang')->join('tb_ekspedisi', 'tb_barang_masuk.id_ekspedisi', '=', 'tb_ekspedisi.id_ekspedisi')->get();
 
         return view('pages.halaman_admin.kelola_barang_masuk.index', $data);
     }
@@ -24,7 +25,9 @@ class BarangMasukController extends Controller
      */
     public function create()
     {
-        return view('pages.halaman_admin.kelola_barang_masuk.create');
+        $data['barang'] = DB::table('tb_barang')->get();
+        $data['ekspedisi'] = DB::table('tb_ekspedisi')->get();
+        return view('pages.halaman_admin.kelola_barang_masuk.create', $data);
     }
 
     /**
@@ -34,35 +37,37 @@ class BarangMasukController extends Controller
     {
         $validasi = $request->validate(
             [
-                'nama_barang_masuk' => 'required',
+                'id_barang' => 'required',
+                'id_ekspedisi' => 'required',
+
                 'jumlah_barang_masuk' => 'required',
                 'tanggal_barang_masuk' => 'required',
             ],
 
             [
-                'nama_barang_masuk.required' => 'Wajib diisi',
+                'id_barang.required' => 'Wajib diisi',
+                'id_ekspedisi.required' => 'Wajib diisi',
                 'jumlah_barang_masuk.required' => 'Wajib diisi',
                 'tanggal_barang_masuk.required' => 'Wajib diisi',
             ]
         );
 
+        $dataById = DB::table('tb_barang')->where('id_barang', $request->id_barang)->first();
+        if ($dataById) {
+            $jumlah_barang = $dataById->jumlah_barang + $request->jumlah_barang_masuk;
 
-        if ($request->hasFile('gambar_barang_masuk')) {
-            $path = 'images/gambar_barang_masuk/';
-            $request->file('gambar_barang_masuk')->move($path, $request->file('gambar_barang_masuk')->getClientOriginalName());
-
-            $gambar_barang_masuk = $path . $request->file('gambar_barang_masuk')->getClientOriginalName();
-        } else {
-
-            return back()->with('error', 'Gambar harus diisi');
+            DB::table('tb_barang')->where('id_barang', $request->id_barang)->update([
+                'jumlah_barang' => $jumlah_barang
+            ]);
         }
-
         $create = BarangMasuk::create([
             'id_barang_masuk' => BarangMasuk::GenerateID(),
-            'nama_barang_masuk' => $request->nama_barang_masuk,
+            'id_barang' => $request->id_barang,
+            'id_ekspedisi' => $request->id_ekspedisi,
+
             'jumlah_barang_masuk' => $request->jumlah_barang_masuk,
             'tanggal_barang_masuk' => $request->tanggal_barang_masuk,
-            'gambar_barang_masuk' => $gambar_barang_masuk
+
         ]);
 
 
@@ -86,7 +91,11 @@ class BarangMasukController extends Controller
      */
     public function edit(string $id)
     {
-        $data['dataById'] = DB::table('tb_barang_masuk')->where('id_barang_masuk', '=', $id)->first();
+
+        $data['barang'] = DB::table('tb_barang')->get();
+        $data['ekspedisi'] = DB::table('tb_ekspedisi')->get();
+
+        $data['dataById'] = DB::table('tb_barang_masuk')->join('tb_barang', 'tb_barang_masuk.id_barang', '=', 'tb_barang.id_barang')->join('tb_ekspedisi', 'tb_barang_masuk.id_ekspedisi', '=', 'tb_ekspedisi.id_ekspedisi')->where('tb_barang_masuk.id_barang_masuk', $id)->first();
 
         return view('pages.halaman_admin.kelola_barang_masuk.edit', $data);
     }
@@ -98,41 +107,45 @@ class BarangMasukController extends Controller
     {
         $validasi = $request->validate(
             [
-                'nama_barang_masuk' => 'required',
+                'id_barang' => 'required',
+                'id_ekspedisi' => 'required',
                 'jumlah_barang_masuk' => 'required',
                 'tanggal_barang_masuk' => 'required',
             ],
 
             [
-                'nama_barang_masuk.required' => 'Wajib diisi',
+                'id_barang.required' => 'Wajib diisi',
+                'id_ekspedisi.required' => 'Wajib diisi',
                 'jumlah_barang_masuk.required' => 'Wajib diisi',
                 'tanggal_barang_masuk.required' => 'Wajib diisi',
             ]
         );
 
-        $dataById = DB::table('tb_barang_masuk')->where('id_barang_masuk', '=', $id)->first();
+        $dataBarangMasukOld = DB::table('tb_barang_masuk')->where('id_barang_masuk', '=', $id)->first();
+        $dataById = DB::table('tb_barang')->where('id_barang', '=', $request->id_barang)->first();
 
-        if ($request->hasFile('gambar_barang_masuk')) {
-            $path = 'images/gambar_barang_masuk/';
-            $request->file('gambar_barang_masuk')->move($path, $request->file('gambar_barang_masuk')->getClientOriginalName());
+        if ($dataById) {
+            $jumlahBarangOld = $dataById->jumlah_barang - $dataBarangMasukOld->jumlah_barang_masuk;
 
-            $gambar_barang_masuk = $path . $request->file('gambar_barang_masuk')->getClientOriginalName();
-        } else {
-            $gambar_barang_masuk = $dataById->gambar_barang_masuk;
-        }
+            $jumlah_barang = $jumlahBarangOld + $request->jumlah_barang_masuk;
 
-        $update = BarangMasuk::where('id_barang_masuk', '=', $id)->update([
-            'nama_barang_masuk' => $request->nama_barang_masuk,
-            'jumlah_barang_masuk' => $request->jumlah_barang_masuk,
-            'tanggal_barang_masuk' => $request->tanggal_barang_masuk,
-            'gambar_barang_masuk' => $gambar_barang_masuk
-        ]);
+            $updateBarang = DB::table('tb_barang')->where('id_barang', $request->id_barang)->update([
+                'jumlah_barang' => $jumlah_barang
+            ]);
 
+            $update = BarangMasuk::where('id_barang_masuk', '=', $id)->update([
+                'id_barang' => $request->id_barang,
+                'id_ekspedisi' => $request->id_ekspedisi,
+                'jumlah_barang_masuk' => $request->jumlah_barang_masuk,
+                'tanggal_barang_masuk' => $request->tanggal_barang_masuk,
 
-        if ($update) {
-            return redirect()->route('barang_masuk.index')->with('success', 'Data Berhasil Di Update');
-        } else {
-            return redirect()->route('barang_masuk.index')->with('error', 'Data Gagal Di Update');
+            ]);
+
+            if ($update && $updateBarang) {
+                return redirect()->route('barang_masuk.index')->with('success', 'Data Berhasil Di Update');
+            } else {
+                return redirect()->route('barang_masuk.index')->with('error', 'Data Gagal Di Update');
+            }
         }
     }
 

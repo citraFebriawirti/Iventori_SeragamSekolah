@@ -31,8 +31,11 @@
     {{-- tinymce --}}
     {{-- <script src="https://cdn.tiny.cloud/1/l8hjhpf3lsu0ykluw6xrcyg5y8nu2flmnewm7gzuyz0m1pl1/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.7.2/tinymce.min.js" ></script>
+    {{-- select --}}
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css" />
   </head>
   <body>
+  @include('sweetalert::alert')
     <div
       class="flex h-screen bg-gray-50 dark:bg-gray-900"
       :class="{ 'overflow-hidden': isSideMenuOpen }"
@@ -46,7 +49,7 @@
             class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
             href="#"
           >
-            Portfolio
+            TOKO MAHMUDA
           </a>
           <ul class="mt-6">
             <li class="relative px-6 py-3">
@@ -80,7 +83,7 @@
             <li class="relative px-6 py-3">
               <button
                 class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                @click="togglePagesMenu"
+                @click="togglePagesMenu1"
                 aria-haspopup="true"
               >
                 <span class="inline-flex items-center">
@@ -113,7 +116,7 @@
                   ></path>
                 </svg>
               </button>
-              <template x-if="isPagesMenuOpen">
+              <template x-if="isPagesMenuOpen1">
                 <ul
                   x-transition:enter="transition-all ease-in-out duration-300"
                   x-transition:enter-start="opacity-25 max-h-0"
@@ -174,7 +177,7 @@
             <li class="relative px-6 py-3">
               <button
                 class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                @click="togglePagesMenu"
+                @click="togglePagesMenu2"
                 aria-haspopup="true"
               >
                 <span class="inline-flex items-center">
@@ -207,7 +210,7 @@
                   ></path>
                 </svg>
               </button>
-              <template x-if="isPagesMenuOpen">
+              <template x-if="isPagesMenuOpen2">
                 <ul
                   x-transition:enter="transition-all ease-in-out duration-300"
                   x-transition:enter-start="opacity-25 max-h-0"
@@ -875,6 +878,8 @@
     
   });
 </script> --}}
+{{-- option --}}
+
    
   </body>
 </html>

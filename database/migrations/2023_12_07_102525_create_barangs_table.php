@@ -12,10 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_barang', function (Blueprint $table) {
-            $table->integer('id_barang')->primary();
+            $table->string('id_barang')->primary()->unique();
+            $table->string('id_kategori')->nullable();
+            $table->string('id_gender')->nullable();
+            $table->string('id_model')->nullable();
+            $table->string('id_busana')->nullable();
+            $table->string('id_bahan')->nullable();
+            $table->string('id_ukuran')->nullable();
+            $table->string('id_jenis')->nullable();
             $table->string('nama_barang')->nullable();
-            $table->integer('jumlah_stok')->nullable();
-            // $table->date('tanggal_masuk')->nullable();
+            $table->integer('jumlah_barang')->nullable();
             $table->string('gambar_barang')->nullable();
             $table->timestamps();
         });

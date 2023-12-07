@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('tb_barang_keluar', function (Blueprint $table) {
             $table->string('id_barang_keluar')->primary()->unique();
-            $table->string('nama_barang_keluar')->nullable();
+            $table->string('id_barang')->nullable();
             $table->integer('jumlah_barang_keluar')->nullable();
             $table->date('tanggal_barang_keluar')->nullable();
-            $table->string('gambar_barang_keluar')->nullable();
             $table->timestamps();
         });
     }

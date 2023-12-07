@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\EkspedisiController;
 use App\Http\Controllers\admin\GenderController;
 use App\Http\Controllers\admin\JenisController;
 use App\Http\Controllers\admin\KategoriController;
+use App\Http\Controllers\admin\LaporanBarangMasuk;
 use App\Http\Controllers\admin\ModelController;
 use App\Http\Controllers\admin\UkuranController;
 use App\Models\Barang;
@@ -35,17 +36,18 @@ Route::get('/', function () {
 Route::resources([
     'dashboard' => DashboardController::class,
     'barang' => BarangController::class,
-     'admin' => AdminController::class,
-     'bahan' => BahanController::class,
-     'gender' => GenderController::class,
-     'ukuran' => UkuranController::class,
-     'barang_masuk' => BarangMasukController::class,
-     'barang_keluar' => BarangKeluarController::class,
-     'ekspedisi' => EkspedisiController::class,
-     'busana' => BusanaController::class,
-     'jenis' => JenisController::class,
-     'kategori' => KategoriController::class,
-     'model' => ModelController::class,
-    
-     
+    'admin' => AdminController::class,
+    'bahan' => BahanController::class,
+    'gender' => GenderController::class,
+    'ukuran' => UkuranController::class,
+    'barang_masuk' => BarangMasukController::class,
+    'barang_keluar' => BarangKeluarController::class,
+    'ekspedisi' => EkspedisiController::class,
+    'busana' => BusanaController::class,
+    'jenis' => JenisController::class,
+    'kategori' => KategoriController::class,
+    'model' => ModelController::class,
+    'laporanbarangmasuk' => LaporanBarangMasuk::class,
+
+
 ]);

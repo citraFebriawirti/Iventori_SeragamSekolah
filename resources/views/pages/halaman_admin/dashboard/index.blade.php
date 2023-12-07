@@ -35,8 +35,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-             3
-            </p>
+            {{ $kategori }}
           </div>
         </div>
         <!-- Card -->
@@ -63,7 +62,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-              2
+            {{ $gender }}
             </p>
           </div>
         </div>
@@ -89,7 +88,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-              2
+            {{ $model }}
             </p>
           </div>
         </div>
@@ -117,7 +116,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-              3
+            {{ $busana }}
             </p>
           </div>
         </div>
@@ -142,7 +141,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-             3
+            {{ $bahan }}
             </p>
           </div>
         </div>
@@ -167,7 +166,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-             5
+            {{ $ukuran }}
             </p>
           </div>
         </div>
@@ -192,7 +191,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-             3
+            {{ $jenis }}
             </p>
           </div>
         </div>
@@ -217,7 +216,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-             5
+            {{ $barang }}
             </p>
           </div>
         </div>
@@ -242,7 +241,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-             3
+            {{ $barang_masuk }}
             </p>
           </div>
         </div>
@@ -267,7 +266,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-             3
+            {{ $barang_keluar }}
             </p>
           </div>
         </div>
@@ -292,7 +291,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-             3
+            {{ $admin }}
             </p>
           </div>
         </div>
@@ -317,7 +316,7 @@
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-200"
             >
-             3
+            {{ $ekspedisi }}
             </p>
           </div>
         </div>

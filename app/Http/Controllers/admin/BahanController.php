@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Bahan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Console\View\Components\Alert;
+// use Alert;
+
 
 class BahanController extends Controller
 {

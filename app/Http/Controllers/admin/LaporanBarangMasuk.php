@@ -1,34 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
-class DashboardController extends Controller
+class LaporanBarangMasuk extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $data['barang_masuk'] = DB::table('tb_barang_masuk')->join('tb_barang', 'tb_barang_masuk.id_barang', '=', 'tb_barang.id_barang')->join('tb_ekspedisi', 'tb_barang_masuk.id_ekspedisi', '=', 'tb_ekspedisi.id_ekspedisi')->get();
 
-        $data['kategori'] = DB::table('tb_kategori')->count();
-        $data['gender'] = DB::table('tb_gender')->count();
-        $data['model'] = DB::table('tb_model')->count();
-        $data['busana'] = DB::table('tb_busana')->count();
-        $data['bahan'] = DB::table('tb_bahan')->count();
-        $data['ukuran'] = DB::table('tb_ukuran')->count();
-        $data['jenis'] = DB::table('tb_jenis')->count();
-        $data['barang'] = DB::table('tb_barang')->count();
-        $data['barang_masuk'] = DB::table('tb_barang_masuk')->count();
-        $data['barang_keluar'] = DB::table('tb_barang_keluar')->count();
-        $data['admin'] = DB::table('tb_admin')->count();
-        $data['ekspedisi'] = DB::table('tb_ekspedisi')->count();
+        $data['jumlahBarangMasuk'] = DB::table('tb_barang_masuk')->sum('jumlah_barang_masuk');
 
-        return view('pages.halaman_admin.dashboard.index', $data);
+        $pdf = PDF::loadview('pages.halaman_admin.laporan_barang_masuk.index', $data);
+        return $pdf->stream();
     }
 
     /**

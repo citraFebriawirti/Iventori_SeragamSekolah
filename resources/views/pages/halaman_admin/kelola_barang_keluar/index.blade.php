@@ -1,7 +1,7 @@
 @extends('layouts.admin.layouts')
 
 @section('content')
-    <!-- Start Content barang masuk -->
+    <!-- Start Content barang keluar -->
 
 
     <main class="h-full pb-16 overflow-y-auto">
@@ -53,10 +53,11 @@
                 <thead>
                     <tr>
                         <th class="border border-slate-200 text-center">No</th>
-                        <th class="border border-slate-200 text-center">Nama</th>
+                        <th class="border border-slate-200 text-center">Nama Barang</th>
                         <th class="border border-slate-200  text-center">Jumlah</th>
                         <th class="border border-slate-200  text-center">Tanggal Keluar</th>
-                        <th class="border border-slate-200  text-center">Gambar</th>
+                       
+                       
                         <th class="border border-slate-200  text-center w-40">Aksi</th>
 
                     </tr>
@@ -66,7 +67,10 @@
                     @foreach ($barang_keluar as $baris)
                         <tr>
                             <td class="border border-slate-200 text-center">{{ $loop->iteration }}</td>
-                            <td class="border border-slate-200 text-center">{{ $baris->nama_barang_keluar }}</td>
+                           
+                            <td class="border border-slate-200 whitespace-pre-line text-center">
+                                {{ $baris->nama_barang}}
+                            </td>
                             <td class="border border-slate-200 whitespace-pre-line text-center">
                                 {{ $baris->jumlah_barang_keluar }}
                             </td>
@@ -74,16 +78,9 @@
                             <td class="border border-slate-200 whitespace-pre-line text-center">
                                 {{ $baris->tanggal_barang_keluar }}
                             </td>
-                            <td class="border border-slate-200">
-                                <div class="flex items-center justify-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    <div class="relative hidden w-32 h-32 rounded-full md:block">
-                                        <img class="object-cover w-full h-full rounded-lg"
-                                            src="{{ asset($baris->gambar_barang_keluar) }}" alt="" loading="lazy" />
-                                    </div>
-                                </div>
-                            </td>
-
+                            
+                            
+                          
 
                             <td class="border border-slate-200">
                                 <div class="flex items-center space-x-4 text-sm">

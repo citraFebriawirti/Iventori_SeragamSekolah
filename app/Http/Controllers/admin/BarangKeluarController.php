@@ -14,8 +14,7 @@ class BarangKeluarController extends Controller
      */
     public function index()
     {
-        $data['barang_keluar'] = DB::table('tb_barang_keluar')->get();
-
+        $data['barang_keluar'] = DB::table('tb_barang_keluar')->join('tb_barang', 'tb_barang_keluar.id_barang', '=', 'tb_barang.id_barang')->get();
         return view('pages.halaman_admin.kelola_barang_keluar.index', $data);
     }
 
@@ -24,7 +23,8 @@ class BarangKeluarController extends Controller
      */
     public function create()
     {
-        return view('pages.halaman_admin.kelola_barang_keluar.create');
+        $data['barang'] = DB::table('tb_barang')->get();
+        return view('pages.halaman_admin.kelola_barang_keluar.create', $data);
     }
 
     /**
@@ -34,35 +34,35 @@ class BarangKeluarController extends Controller
     {
         $validasi = $request->validate(
             [
-                'nama_barang_keluar' => 'required',
+                'id_barang' => 'required',
                 'jumlah_barang_keluar' => 'required',
                 'tanggal_barang_keluar' => 'required',
             ],
 
             [
-                'nama_barang_keluar.required' => 'Wajib diisi',
+                'id_barang.required' => 'Wajib diisi',
                 'jumlah_barang_keluar.required' => 'Wajib diisi',
                 'tanggal_barang_keluar.required' => 'Wajib diisi',
             ]
         );
 
+        $dataById = DB::table('tb_barang')->where('id_barang', $request->id_barang)->first();
+        if ($dataById) {
+            $jumlah_barang = $dataById->jumlah_barang - $request->jumlah_barang_keluar;
 
-        if ($request->hasFile('gambar_barang_keluar')) {
-            $path = 'images/gambar_barang_keluar/';
-            $request->file('gambar_barang_keluar')->move($path, $request->file('gambar_barang_keluar')->getClientOriginalName());
-
-            $gambar_barang_keluar = $path . $request->file('gambar_barang_keluar')->getClientOriginalName();
-        } else {
-
-            return back()->with('error', 'Gambar harus diisi');
+            DB::table('tb_barang')->where('id_barang', $request->id_barang)->update([
+                'jumlah_barang' => $jumlah_barang
+            ]);
         }
+
+
 
         $create = BarangKeluar::create([
             'id_barang_keluar' => BarangKeluar::GenerateID(),
-            'nama_barang_keluar' => $request->nama_barang_keluar,
+            'id_barang' => $request->id_barang,
             'jumlah_barang_keluar' => $request->jumlah_barang_keluar,
             'tanggal_barang_keluar' => $request->tanggal_barang_keluar,
-            'gambar_barang_keluar' => $gambar_barang_keluar
+
         ]);
 
 
@@ -86,7 +86,9 @@ class BarangKeluarController extends Controller
      */
     public function edit(string $id)
     {
-        $data['dataById'] = DB::table('tb_barang_keluar')->where('id_barang_keluar', '=', $id)->first();
+        $data['barang'] = DB::table('tb_barang')->get();
+
+        $data['barang_keluar'] = DB::table('tb_barang_keluar')->join('tb_barang', 'tb_barang_keluar.id_barang', '=', 'tb_barang.id_barang')->where('tb_barang_keluar.id_barang_keluar', $id)->first();
 
         return view('pages.halaman_admin.kelola_barang_keluar.edit', $data);
     }
@@ -98,38 +100,41 @@ class BarangKeluarController extends Controller
     {
         $validasi = $request->validate(
             [
-                'nama_barang_keluar' => 'required',
+                'id_barang' => 'required',
                 'jumlah_barang_keluar' => 'required',
                 'tanggal_barang_keluar' => 'required',
             ],
 
             [
-                'nama_barang_keluar.required' => 'Wajib diisi',
+                'id_barang.required' => 'Wajib diisi',
                 'jumlah_barang_keluar.required' => 'Wajib diisi',
                 'tanggal_barang_keluar.required' => 'Wajib diisi',
             ]
         );
 
-        $dataById = DB::table('tb_barang_keluar')->where('id_barang_keluar', '=', $id)->first();
+        $dataBarangMasukOld = DB::table('tb_barang_keluar')->where('id_barang_keluar', '=', $id)->first();
+        $dataById = DB::table('tb_barang')->where('id_barang', '=', $request->id_barang)->first();
 
-        if ($request->hasFile('gambar_barang_keluar')) {
-            $path = 'images/gambar_barang_keluar/';
-            $request->file('gambar_barang_keluar')->move($path, $request->file('gambar_barang_keluar')->getClientOriginalName());
+        if ($dataById) {
+            $jumlahBarangOld = $dataById->jumlah_barang - $dataBarangMasukOld->jumlah_barang_keluar;
 
-            $gambar_barang_keluar = $path . $request->file('gambar_barang_keluar')->getClientOriginalName();
-        } else {
-            $gambar_barang_keluar = $dataById->gambar_barang_keluar;
-        }
+            $jumlah_barang = $jumlahBarangOld - $request->jumlah_barang_keluar;
+
+            $updateBarang = DB::table('tb_barang')->where('id_barang', $request->id_barang)->update([
+                'jumlah_barang' => $jumlah_barang
+            ]);
+        };
+
 
         $update = BarangKeluar::where('id_barang_keluar', '=', $id)->update([
-            'nama_barang_keluar' => $request->nama_barang_keluar,
+            'id_barang' => $request->id_barang,
             'jumlah_barang_keluar' => $request->jumlah_barang_keluar,
             'tanggal_barang_keluar' => $request->tanggal_barang_keluar,
-            'gambar_barang_keluar' => $gambar_barang_keluar
+
         ]);
 
 
-        if ($update) {
+        if ($update && $updateBarang) {
             return redirect()->route('barang_keluar.index')->with('success', 'Data Berhasil Di Update');
         } else {
             return redirect()->route('barang_keluar.index')->with('error', 'Data Gagal Di Update');

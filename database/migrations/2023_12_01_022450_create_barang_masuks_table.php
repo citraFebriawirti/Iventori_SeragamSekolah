@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('tb_barang_masuk', function (Blueprint $table) {
             $table->string('id_barang_masuk')->primary()->unique();
-            $table->string('nama_barang_masuk')->nullable();
+            $table->string('id_barang')->nullable();
+            $table->string('id_ekspedisi')->nullable();
             $table->integer('jumlah_barang_masuk')->nullable();
             $table->date('tanggal_barang_masuk')->nullable();
-            $table->string('gambar_barang_masuk')->nullable();
             $table->timestamps();
         });
     }

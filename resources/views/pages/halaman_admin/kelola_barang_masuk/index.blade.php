@@ -31,6 +31,13 @@
                     </li>
                 </ol>
 
+                <div class="px-0 my-6">
+                    <a href="{{ route('barang_masuk.create') }}"
+                        class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                        Tambah
+                        <span class="ml-2" aria-hidden="true">+</span>
+                    </a>
+                </div>
                 <!-- Sisi kanan -->
                 <div class="px-6 my-6">
                     <a href="{{ route('barang_masuk.create') }}"
@@ -53,10 +60,12 @@
                 <thead>
                     <tr>
                         <th class="border border-slate-200 text-center">No</th>
-                        <th class="border border-slate-200 text-center">Nama</th>
+                        <th class="border border-slate-200 text-center">Nama Barang</th>
                         <th class="border border-slate-200  text-center">Jumlah</th>
                         <th class="border border-slate-200  text-center">Tanggal Masuk</th>
-                        <th class="border border-slate-200  text-center">Gambar</th>
+                        <th class="border border-slate-200 text-center">Nama Ekspedisi</th>
+                      
+                       
                         <th class="border border-slate-200  text-center w-40">Aksi</th>
 
                     </tr>
@@ -66,7 +75,10 @@
                     @foreach ($barang_masuk as $baris)
                         <tr>
                             <td class="border border-slate-200 text-center">{{ $loop->iteration }}</td>
-                            <td class="border border-slate-200 text-center">{{ $baris->nama_barang_masuk }}</td>
+                           
+                            <td class="border border-slate-200 whitespace-pre-line text-center">
+                                {{ $baris->nama_barang}}
+                            </td>
                             <td class="border border-slate-200 whitespace-pre-line text-center">
                                 {{ $baris->jumlah_barang_masuk }}
                             </td>
@@ -74,16 +86,11 @@
                             <td class="border border-slate-200 whitespace-pre-line text-center">
                                 {{ $baris->tanggal_barang_masuk }}
                             </td>
-                            <td class="border border-slate-200">
-                                <div class="flex items-center justify-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    <div class="relative hidden w-32 h-32 rounded-full md:block">
-                                        <img class="object-cover w-full h-full rounded-lg"
-                                            src="{{ asset($baris->gambar_barang_masuk) }}" alt="" loading="lazy" />
-                                    </div>
-                                </div>
+                            
+                            <td class="border border-slate-200 whitespace-pre-line text-center">
+                                {{ $baris->nama_ekspedisi}}
                             </td>
-
+                          
 
                             <td class="border border-slate-200">
                                 <div class="flex items-center space-x-4 text-sm">
