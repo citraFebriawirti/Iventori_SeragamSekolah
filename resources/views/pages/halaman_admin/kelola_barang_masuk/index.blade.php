@@ -31,13 +31,19 @@
                     </li>
                 </ol>
 
-                <div class="px-0 my-6">
-                    <a href="{{ route('barang_masuk.create') }}"
-                        class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                        Tambah
-                        <span class="ml-2" aria-hidden="true">+</span>
+                <div class="px-0 my-6 ml-[500px]">
+                    <a href="{{ route('laporanbarangmasuk.index') }}"
+                        class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-500 border border-transparent rounded-lg active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-purple">
+                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                        Laporan
+                      
                     </a>
                 </div>
+                
                 <!-- Sisi kanan -->
                 <div class="px-6 my-6">
                     <a href="{{ route('barang_masuk.create') }}"

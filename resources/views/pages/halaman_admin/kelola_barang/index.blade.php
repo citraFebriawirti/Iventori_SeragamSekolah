@@ -60,6 +60,7 @@
                         <th class="border border-slate-200  text-center">Gender</th>
                         <th class="border border-slate-200  text-center">Model</th>
                         <th class="border border-slate-200  text-center">Busana</th>
+                        <th class="border border-slate-200  text-center">Bahan</th>
                         <th class="border border-slate-200  text-center">Ukuran</th>
                         <th class="border border-slate-200  text-center">Jenis</th>
                         <th class="border border-slate-200  text-center w-80">Aksi</th>
@@ -88,6 +89,7 @@
                             <td class="border border-slate-200 text-center">{{ $baris->nama_gender }}</td>
                             <td class="border border-slate-200 text-center">{{ $baris->nama_model }}</td>
                             <td class="border border-slate-200 text-center">{{ $baris->nama_busana }}</td>
+                            <td class="border border-slate-200 text-center">{{ $baris->nama_bahan }}</td>
                             <td class="border border-slate-200 text-center">{{ $baris->nama_ukuran }}</td>
                             <td class="border border-slate-200 text-center">{{ $baris->nama_jenis }}</td>
                                                    

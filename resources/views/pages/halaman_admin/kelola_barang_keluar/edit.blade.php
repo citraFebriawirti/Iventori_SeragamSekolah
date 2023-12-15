@@ -66,15 +66,20 @@
                 <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                     @csrf
                     @method('PUT')
-                    <div>
-                        <select name="id_barang" id="id_barang" required class="form-control">
-                           @foreach ($barang as $data)
-                               <option value="{{$data->id_barang}}">{{ $data->nama_barang}}</option>
+                    <div class="w-96 mx-auto me-20 ">
+
+                        <label for="" class="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-400">Nama Barang</label>
+                            <select  name="id_barang" id="id_barang" required  class="w-40 me-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                @foreach ($barang as $data)
+                                <option value="{{$data->id_barang}}">{{ $data->nama_barang}}</option>
+                          
                            @endforeach
+                            
                         </select>
+                        <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
                     </div>
                   
-                    <div class="w-72">
+                    <div class="w-96">
                         <div class="relative h-10 w-full min-w-[250px] mt-5">
                             <input
                                 class="peer h-full w-full bg-white border border-gray-300 rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-indigo-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"

@@ -17,12 +17,32 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+
     protected $fillable = [
-        'name',
+        'id_users',
+        'nama_users',
         'email',
         'password',
+        'gambar_users'
     ];
 
+
+    public static function GenerateID()
+    {
+        $prefix = 'Users' . date('ymd');
+
+        $last_id = User::where('id_users', 'like', $prefix . '%')->max('id_users');
+
+        if ($last_id == null) {
+            $kode = $prefix . '000000001';
+        } else {
+            $kode = str_replace($prefix, "", $last_id);
+            $kode = (int) $kode + 1;
+            $kode = $prefix . str_pad($kode, 9, "0", STR_PAD_LEFT);
+        }
+        return $kode;
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

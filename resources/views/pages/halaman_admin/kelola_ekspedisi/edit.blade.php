@@ -111,6 +111,8 @@
                                     <label for="file-upload"
                                         class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                         <span class="">Upload a file</span>
+                                        <img src="{{ asset($dataById->gambar_ekspedisi) }}
+                                        " alt="" class="w-48">
                                         <input id="file-upload" name="gambar_ekspedisi" type="file" class="sr-only">
                                     </label>
 

@@ -63,7 +63,7 @@
         <tr style="background-color: white; border:none;">
             <td style="background-color: white; border:none;">
                 <h3 style="font-size: 15px; text-transform:uppercase; font-weight:normal;">
-                    LAPORAN BARANG MASUK
+                    LAPORAN BARANG KELUAR
 
                 </h3>
             </td>
@@ -76,13 +76,13 @@
                     <th class="border border-slate-200 text-center">No</th>
                     <th class="border border-slate-200 text-center">Nama Barang</th>
                     <th class="border border-slate-200  text-center">Tanggal Masuk</th>
-                    <th class="border border-slate-200 text-center">Nama Ekspedisi</th>
+               
                     <th class="border border-slate-200  text-center">Jumlah</th>
                 </tr>
             </thead>
             <tbody>
 
-                @foreach ($barang_masuk as $baris)
+                @foreach ($barang_keluar as $baris)
                 <tr>
                     <td class="border border-slate-200 text-center">{{ $loop->iteration }}</td>
 
@@ -91,22 +91,19 @@
                     </td>
 
                     <td class="border border-slate-200 whitespace-pre-line text-center">
-                        {{ $baris->tanggal_barang_masuk }}
+                        {{ $baris->tanggal_barang_keluar }}
                     </td>
 
+                
                     <td class="border border-slate-200 whitespace-pre-line text-center">
-                        {{ $baris->nama_ekspedisi}}
-                    </td>
-
-                    <td class="border border-slate-200 whitespace-pre-line text-center">
-                        {{ $baris->jumlah_barang_masuk }}
+                        {{ $baris->jumlah_barang_keluar }}
                     </td>
                 </tr>
                 @endforeach
                 <tr>
                     <td></td>
-                    <td colspan="3" style="text-align: right;">Total </td>
-                    <td style="text-align:center;">{{ $jumlahBarangMasuk }}</td>
+                    <td colspan="2" style="text-align: right;">Total </td>
+                    <td style="text-align:center;">{{ $jumlahBarangKeluar }}</td>
                 </tr>
             </tbody>
         </table>

@@ -88,7 +88,7 @@ class BarangKeluarController extends Controller
     {
         $data['barang'] = DB::table('tb_barang')->get();
 
-        $data['barang_keluar'] = DB::table('tb_barang_keluar')->join('tb_barang', 'tb_barang_keluar.id_barang', '=', 'tb_barang.id_barang')->where('tb_barang_keluar.id_barang_keluar', $id)->first();
+        $data['dataById'] = DB::table('tb_barang_keluar')->join('tb_barang', 'tb_barang_keluar.id_barang', '=', 'tb_barang.id_barang')->where('tb_barang_keluar.id_barang_keluar', $id)->first();
 
         return view('pages.halaman_admin.kelola_barang_keluar.edit', $data);
     }

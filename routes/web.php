@@ -12,8 +12,10 @@ use App\Http\Controllers\admin\GenderController;
 use App\Http\Controllers\admin\JenisController;
 use App\Http\Controllers\admin\KategoriController;
 use App\Http\Controllers\admin\LaporanBarangMasuk;
+use App\Http\Controllers\admin\LaporanBarangKeluar;
 use App\Http\Controllers\admin\ModelController;
 use App\Http\Controllers\admin\UkuranController;
+use App\Http\Controllers\AuthController;
 use App\Models\Barang;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +34,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::controller(AuthController::class)->group(function () {
+    Route::get('register', 'register')->name('register');
+    Route::post('registerProcces', 'registerSave')->name('register.save');
+    Route::get('login', 'login')->name('login');
+    Route::post('register', 'loginProcces')->name('login.procces');
+    Route::get('logout', 'logout')->name('logout');
+});
 
 Route::resources([
     'dashboard' => DashboardController::class,
@@ -48,6 +57,7 @@ Route::resources([
     'kategori' => KategoriController::class,
     'model' => ModelController::class,
     'laporanbarangmasuk' => LaporanBarangMasuk::class,
+    'laporanbarangkeluar' => LaporanBarangKeluar::class,
 
 
 ]);

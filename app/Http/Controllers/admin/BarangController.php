@@ -14,7 +14,7 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $data['barang'] = DB::table('tb_barang')->join('tb_kategori', 'tb_barang.id_kategori', '=', 'tb_kategori.id_kategori')->join('tb_gender', 'tb_barang.id_gender', '=', 'tb_gender.id_gender')->join('tb_model', 'tb_barang.id_model', '=', 'tb_model.id_model')->join('tb_busana', 'tb_barang.id_busana', '=', 'tb_busana.id_busana')->join('tb_ukuran', 'tb_barang.id_ukuran', '=', 'tb_ukuran.id_ukuran')->join('tb_jenis', 'tb_barang.id_jenis', '=', 'tb_jenis.id_jenis')->get();
+        $data['barang'] = DB::table('tb_barang')->join('tb_kategori', 'tb_barang.id_kategori', '=', 'tb_kategori.id_kategori')->join('tb_gender', 'tb_barang.id_gender', '=', 'tb_gender.id_gender')->join('tb_model', 'tb_barang.id_model', '=', 'tb_model.id_model')->join('tb_busana', 'tb_barang.id_busana', '=', 'tb_busana.id_busana')->join('tb_bahan', 'tb_barang.id_bahan', '=', 'tb_bahan.id_bahan')->join('tb_ukuran', 'tb_barang.id_ukuran', '=', 'tb_ukuran.id_ukuran')->join('tb_jenis', 'tb_barang.id_jenis', '=', 'tb_jenis.id_jenis')->get();
 
         return view('pages.halaman_admin.kelola_barang.index', $data);
     }
@@ -44,7 +44,7 @@ class BarangController extends Controller
         $validasi = $request->validate(
             [
                 'nama_barang' => 'required',
-                'jumlah_barang' => 'required',
+                // 'jumlah_barang' => 'required',
                 'id_kategori' => 'required',
                 'id_gender' => 'required',
                 'id_model' => 'required',
@@ -58,7 +58,7 @@ class BarangController extends Controller
 
             [
                 'nama_barang.required' => 'Wajib diisi',
-                'jumlah_barang.required' => 'Wajib diisi',
+                // 'jumlah_barang.required' => 'Wajib diisi',
                 'id_kategori.required' => 'Wajib diisi',
                 'id_gender.required' => 'Wajib diisi',
                 'id_model.required' => 'Wajib diisi',
@@ -126,7 +126,7 @@ class BarangController extends Controller
         $data['ukuran'] = DB::table('tb_ukuran')->get();
         $data['jenis'] = DB::table('tb_jenis')->get();
 
-        $data['dataById'] = DB::table('tb_barang')->join('tb_kategori', 'tb_barang.id_kategori', '=', 'tb_kategori.id_kategori')->join('tb_gender', 'tb_barang.id_gender', '=', 'tb_gender.id_gender')->join('tb_model', 'tb_barang.id_model', '=', 'tb_model.id_model')->join('tb_busana', 'tb_barang.id_busana', '=', 'tb_busana.id_busana')->join('tb_ukuran', 'tb_barang.id_ukuran', '=', 'tb_ukuran.id_ukuran')->join('tb_jenis', 'tb_barang.id_jenis', '=', 'tb_jenis.id_jenis')->where('tb_barang.id_barang', $id)->first();
+        $data['dataById'] = DB::table('tb_barang')->join('tb_kategori', 'tb_barang.id_kategori', '=', 'tb_kategori.id_kategori')->join('tb_gender', 'tb_barang.id_gender', '=', 'tb_gender.id_gender')->join('tb_model', 'tb_barang.id_model', '=', 'tb_model.id_model')->join('tb_busana', 'tb_barang.id_busana', '=', 'tb_busana.id_busana')->join('tb_bahan', 'tb_barang.id_bahan', '=', 'tb_bahan.id_bahan')->join('tb_ukuran', 'tb_barang.id_ukuran', '=', 'tb_ukuran.id_ukuran')->join('tb_jenis', 'tb_barang.id_jenis', '=', 'tb_jenis.id_jenis')->where('tb_barang.id_barang', $id)->first();
 
         return view('pages.halaman_admin.kelola_barang.edit', $data);
     }
@@ -139,13 +139,13 @@ class BarangController extends Controller
         $validasi = $request->validate(
             [
                 'nama_barang' => 'required',
-                'jumlah_barang' => 'required',
+                // 'jumlah_barang' => 'required',
 
             ],
 
             [
                 'nama_barang.required' => 'Wajib diisi',
-                'jumlah_barang.required' => 'Wajib diisi',
+                // 'jumlah_barang.required' => 'Wajib diisi',
 
             ]
         );
