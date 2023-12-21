@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -16,6 +17,11 @@ class AdminController extends Controller
     {
 
         $data['admin'] = DB::table('tb_admin')->get();
+
+        if (!Session::get('id')) {
+
+            return redirect()->route('login')->with('tidak_login', 'login');
+        }
 
         return view('pages.halaman_admin.kelola_admin.index', $data);
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
@@ -27,6 +28,11 @@ class DashboardController extends Controller
         $data['barang_keluar'] = DB::table('tb_barang_keluar')->count();
         $data['admin'] = DB::table('tb_admin')->count();
         $data['ekspedisi'] = DB::table('tb_ekspedisi')->count();
+
+        if (!Session::get('id')) {
+
+            return redirect()->route('login')->with('tidak_login', 'login');
+        }
 
         return view('pages.halaman_admin.dashboard.index', $data);
     }

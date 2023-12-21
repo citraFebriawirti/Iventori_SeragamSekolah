@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ukuran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class UkuranController extends Controller
 {
@@ -15,6 +16,11 @@ class UkuranController extends Controller
     public function index()
     {
         $data['ukuran'] = DB::table('tb_ukuran')->orderBy('id_ukuran', 'desc')->get();
+
+        if (!Session::get('id')) {
+
+            return redirect()->route('login')->with('tidak_login', 'login');
+        }
 
         return view('pages.halaman_admin.kelola_ukuran.index', $data);
     }

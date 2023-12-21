@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Models;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class ModelController extends Controller
 {
@@ -15,6 +16,11 @@ class ModelController extends Controller
     public function index()
     {
         $data['model'] = DB::table('tb_model')->orderBy('id_model', 'desc')->get();
+
+        if (!Session::get('id')) {
+
+            return redirect()->route('login')->with('tidak_login', 'login');
+        }
 
         return view('pages.halaman_admin.kelola_model.index', $data);
     }

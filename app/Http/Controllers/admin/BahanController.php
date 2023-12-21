@@ -7,6 +7,8 @@ use App\Models\Bahan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Console\View\Components\Alert;
+use Illuminate\Support\Facades\Session;
+
 // use Alert;
 
 
@@ -18,6 +20,11 @@ class BahanController extends Controller
     public function index()
     {
         $data['bahan'] = DB::table('tb_bahan')->orderBy('id_bahan', 'desc')->get();
+
+        if (!Session::get('id')) {
+
+            return redirect()->route('login')->with('tidak_login', 'login');
+        }
 
         return view('pages.halaman_admin.kelola_bahan.index', $data);
     }

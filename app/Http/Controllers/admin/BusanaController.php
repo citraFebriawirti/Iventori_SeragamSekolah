@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Busana;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class BusanaController extends Controller
 {
@@ -15,6 +16,11 @@ class BusanaController extends Controller
     public function index()
     {
         $data['busana'] = DB::table('tb_busana')->orderBy('id_busana', 'desc')->get();
+
+        if (!Session::get('id')) {
+
+            return redirect()->route('login')->with('tidak_login', 'login');
+        }
 
         return view('pages.halaman_admin.kelola_busana.index', $data);
     }

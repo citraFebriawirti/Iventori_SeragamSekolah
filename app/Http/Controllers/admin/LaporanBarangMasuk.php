@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use PDF;
 
 class LaporanBarangMasuk extends Controller
@@ -16,7 +17,14 @@ class LaporanBarangMasuk extends Controller
     {
         $data['barang_masuk'] = DB::table('tb_barang_masuk')->join('tb_barang', 'tb_barang_masuk.id_barang', '=', 'tb_barang.id_barang')->join('tb_ekspedisi', 'tb_barang_masuk.id_ekspedisi', '=', 'tb_ekspedisi.id_ekspedisi')->get();
 
-        $data['jumlahBarangMasuk'] = DB::table('tb_barang_masuk')->sum('jumlah_barang_masuk');
+        if (!Session::get('id')) {
+
+            return redirect()->route('login')->with('tidak_login', 'login');
+        }
+
+        $data['jumlahBarangMasuk'] = DB::table('tb_barang_masuk')->join('tb_barang', 'tb_barang_masuk.id_barang', '=', 'tb_barang.id_barang')->join('tb_ekspedisi', 'tb_barang_masuk.id_ekspedisi', '=', 'tb_ekspedisi.id_ekspedisi')->sum('jumlah_barang_masuk');
+
+        $data['hargaBarangMasuk'] = DB::table('tb_barang_masuk')->join('tb_barang', 'tb_barang_masuk.id_barang', '=', 'tb_barang.id_barang')->join('tb_ekspedisi', 'tb_barang_masuk.id_ekspedisi', '=', 'tb_ekspedisi.id_ekspedisi')->sum('harga_barang');
 
         $pdf = PDF::loadview('pages.halaman_admin.laporan_barang_masuk.index', $data);
         return $pdf->stream();

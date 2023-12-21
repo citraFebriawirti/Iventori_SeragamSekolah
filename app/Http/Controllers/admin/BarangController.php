@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class BarangController extends Controller
 {
@@ -15,6 +16,11 @@ class BarangController extends Controller
     public function index()
     {
         $data['barang'] = DB::table('tb_barang')->join('tb_kategori', 'tb_barang.id_kategori', '=', 'tb_kategori.id_kategori')->join('tb_gender', 'tb_barang.id_gender', '=', 'tb_gender.id_gender')->join('tb_model', 'tb_barang.id_model', '=', 'tb_model.id_model')->join('tb_busana', 'tb_barang.id_busana', '=', 'tb_busana.id_busana')->join('tb_bahan', 'tb_barang.id_bahan', '=', 'tb_bahan.id_bahan')->join('tb_ukuran', 'tb_barang.id_ukuran', '=', 'tb_ukuran.id_ukuran')->join('tb_jenis', 'tb_barang.id_jenis', '=', 'tb_jenis.id_jenis')->get();
+
+        if (!Session::get('id')) {
+
+            return redirect()->route('login')->with('tidak_login', 'login');
+        }
 
         return view('pages.halaman_admin.kelola_barang.index', $data);
     }
@@ -44,7 +50,8 @@ class BarangController extends Controller
         $validasi = $request->validate(
             [
                 'nama_barang' => 'required',
-                // 'jumlah_barang' => 'required',
+                'jumlah_barang' => 'required',
+                'harga_barang' => 'required',
                 'id_kategori' => 'required',
                 'id_gender' => 'required',
                 'id_model' => 'required',
@@ -58,7 +65,8 @@ class BarangController extends Controller
 
             [
                 'nama_barang.required' => 'Wajib diisi',
-                // 'jumlah_barang.required' => 'Wajib diisi',
+                'jumlah_barang.required' => 'Wajib diisi',
+                'harga_barang.required' => 'Wajib diisi',
                 'id_kategori.required' => 'Wajib diisi',
                 'id_gender.required' => 'Wajib diisi',
                 'id_model.required' => 'Wajib diisi',
@@ -93,6 +101,7 @@ class BarangController extends Controller
             'id_jenis' => $request->id_jenis,
             'nama_barang' => $request->nama_barang,
             'jumlah_barang' => $request->jumlah_barang,
+            'harga_barang' => $request->harga_barang,
             'gambar_barang' => $gambar_barang
         ]);
 
@@ -139,13 +148,15 @@ class BarangController extends Controller
         $validasi = $request->validate(
             [
                 'nama_barang' => 'required',
-                // 'jumlah_barang' => 'required',
+                'jumlah_barang' => 'required',
+                'harga_barang' => 'required',
 
             ],
 
             [
                 'nama_barang.required' => 'Wajib diisi',
-                // 'jumlah_barang.required' => 'Wajib diisi',
+                'jumlah_barang.required' => 'Wajib diisi',
+                'harga_barang.required' => 'Wajib diisi',
 
             ]
         );
@@ -164,6 +175,7 @@ class BarangController extends Controller
         $update = Barang::where('id_barang', '=', $id)->update([
             'nama_barang' => $request->nama_barang,
             'jumlah_barang' => $request->jumlah_barang,
+            'harga_barang' => $request->harga_barang,
             'gambar_barang' => $gambar_barang
         ]);
 

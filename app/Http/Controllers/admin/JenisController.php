@@ -6,12 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Jenis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class JenisController extends Controller
 {
     public function index()
     {
         $data['jenis'] = DB::table('tb_jenis')->orderBy('id_jenis', 'desc')->get();
+
+        if (!Session::get('id')) {
+
+            return redirect()->route('login')->with('tidak_login', 'login');
+        }
 
         return view('pages.halaman_admin.kelola_jenis.index', $data);
     }

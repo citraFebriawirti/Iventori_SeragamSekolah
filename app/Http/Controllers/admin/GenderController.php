@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Gender;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class GenderController extends Controller
 {
@@ -15,6 +16,11 @@ class GenderController extends Controller
     public function index()
     {
         $data['gender'] = DB::table('tb_gender')->orderBy('id_gender', 'desc')->get();
+
+        if (!Session::get('id')) {
+
+            return redirect()->route('login')->with('tidak_login', 'login');
+        }
 
         return view('pages.halaman_admin.kelola_gender.index', $data);
     }

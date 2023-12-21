@@ -77,7 +77,10 @@
                     <th class="border border-slate-200 text-center">Nama Barang</th>
                     <th class="border border-slate-200  text-center">Tanggal Masuk</th>
                     <th class="border border-slate-200 text-center">Nama Ekspedisi</th>
+                   
                     <th class="border border-slate-200  text-center">Jumlah</th>
+                    <th class="border border-slate-200  text-center">Harga Per Item</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -97,16 +100,29 @@
                     <td class="border border-slate-200 whitespace-pre-line text-center">
                         {{ $baris->nama_ekspedisi}}
                     </td>
-
                     <td class="border border-slate-200 whitespace-pre-line text-center">
                         {{ $baris->jumlah_barang_masuk }}
                     </td>
+                    <td class="border border-slate-200 whitespace-pre-line text-center">
+                        Rp {{ number_format($baris->harga_barang, 0, ',', '.') }}
+                    </td>
+                    
+                   
                 </tr>
                 @endforeach
+               
                 <tr>
-                    <td></td>
-                    <td colspan="3" style="text-align: right;">Total </td>
+                   
+                    <td colspan="4" style="text-align: right;">Total Jumlah </td>
                     <td style="text-align:center;">{{ $jumlahBarangMasuk }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                   
+                    <td colspan="4" style="text-align: right;">Total Harga</td>
+                    <td></td>
+                    <td style="text-align:center;">Rp {{ number_format($hargaBarangMasuk * $jumlahBarangMasuk, 0, ',', '.') }}</td>
+
                 </tr>
             </tbody>
         </table>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class KategoriController extends Controller
 {
@@ -15,6 +16,11 @@ class KategoriController extends Controller
     public function index()
     {
         $data['kategori'] = DB::table('tb_kategori')->orderBy('id_kategori', 'desc')->get();
+
+        if (!Session::get('id')) {
+
+            return redirect()->route('login')->with('tidak_login', 'login');
+        }
 
         return view('pages.halaman_admin.kelola_kategori.index', $data);
     }

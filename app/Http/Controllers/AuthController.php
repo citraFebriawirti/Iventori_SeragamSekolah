@@ -68,9 +68,12 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             // membuat session
-            Session(['id_users' => auth()->user()->id_users]);
+            Session(['id' => auth()->user()->id_users]);
             Session(['email' => auth()->user()->email]);
             Session(['password' => auth()->user()->password]);
+            // Session(['gambar_user' => auth()->user()->gambar_user]);
+            Session(['nama_users' => auth()->user()->nama_users]);
+            $request->session()->put('gambar_users', auth()->user()->gambar_users);
 
             return redirect()->intended('/dashboard')->with('success', 'Selamat Datang ' . auth()->user()->nama_users);
         }

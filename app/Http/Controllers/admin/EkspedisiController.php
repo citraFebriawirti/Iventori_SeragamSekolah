@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ekspedisi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class EkspedisiController extends Controller
 {
@@ -16,6 +17,11 @@ class EkspedisiController extends Controller
     {
 
         $data['ekspedisi'] = DB::table('tb_ekspedisi')->get();
+
+        if (!Session::get('id')) {
+
+            return redirect()->route('login')->with('tidak_login', 'login');
+        }
 
         return view('pages.halaman_admin.kelola_ekspedisi.index', $data);
     }

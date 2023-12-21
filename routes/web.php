@@ -14,6 +14,7 @@ use App\Http\Controllers\admin\KategoriController;
 use App\Http\Controllers\admin\LaporanBarangMasuk;
 use App\Http\Controllers\admin\LaporanBarangKeluar;
 use App\Http\Controllers\admin\ModelController;
+use App\Http\Controllers\admin\ProfileController;
 use App\Http\Controllers\admin\UkuranController;
 use App\Http\Controllers\AuthController;
 use App\Models\Barang;
@@ -30,6 +31,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -42,7 +44,11 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('logout', 'logout')->name('logout');
 });
 
+
+
+
 Route::resources([
+    'profile' => ProfileController::class,
     'dashboard' => DashboardController::class,
     'barang' => BarangController::class,
     'admin' => AdminController::class,
@@ -58,6 +64,5 @@ Route::resources([
     'model' => ModelController::class,
     'laporanbarangmasuk' => LaporanBarangMasuk::class,
     'laporanbarangkeluar' => LaporanBarangKeluar::class,
-
 
 ]);

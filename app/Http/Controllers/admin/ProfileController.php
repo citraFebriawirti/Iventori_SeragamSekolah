@@ -3,32 +3,18 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Desc_Singkat;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
-use PDF;
 
-class LaporanBarangKeluar extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data['barang_keluar'] = DB::table('tb_barang_keluar')->join('tb_barang', 'tb_barang_keluar.id_barang', '=', 'tb_barang.id_barang')->get();
 
-        if (!Session::get('id')) {
-
-            return redirect()->route('login')->with('tidak_login', 'login');
-        }
-
-        $data['jumlahBarangKeluar'] = DB::table('tb_barang_keluar')->join('tb_barang', 'tb_barang_keluar.id_barang', '=', 'tb_barang.id_barang')->sum('jumlah_barang_keluar');
-
-
-        $data['hargaBarangKeluar'] = DB::table('tb_barang_masuk')->join('tb_barang', 'tb_barang_masuk.id_barang', '=', 'tb_barang.id_barang')->join('tb_ekspedisi', 'tb_barang_masuk.id_ekspedisi', '=', 'tb_ekspedisi.id_ekspedisi')->sum('harga_barang');
-
-        $pdf = PDF::loadview('pages.halaman_admin.laporan_barang_keluar.index', $data);
-        return $pdf->stream();
+        return view('pages.halaman_admin.profile.index');
     }
 
     /**
@@ -76,6 +62,5 @@ class LaporanBarangKeluar extends Controller
      */
     public function destroy(string $id)
     {
-        //
     }
 }

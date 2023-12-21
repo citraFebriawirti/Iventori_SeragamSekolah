@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css" />
   </head>
   <body>
+ 
   @include('sweetalert::alert')
     <div
       class="flex h-screen bg-gray-50 dark:bg-gray-900"
@@ -568,7 +569,7 @@
         <div class="px-6 my-6">
           <a href="{{ route('logout') }}">
             <button class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                Logout
+                Logout 
                 <span class="ml-2" aria-hidden="true">&RightArrow;</span>
             </button>
         </a>
@@ -680,7 +681,7 @@
                 
                   <img
                       class="object-cover w-8 h-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
+                      src="{{ asset(session('gambar_users')) }}"
                       alt=""
                       aria-hidden="true"
                   />
@@ -702,7 +703,7 @@
                     <li class="flex">
                       <a
                         class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                        href="#"
+                        href="{{route('profile.index')}}"
                       >
                         <svg
                           class="w-4 h-4 mr-3"
