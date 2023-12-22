@@ -56,12 +56,36 @@ c) Proses yang akan dilakukan yaitu :
 | 3   | Collaborator   | ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) 	![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)  |
 
 
-## Alur Bisnis
-
 ## Relasi Tabel
+![Alt text](image-18.png)
+
+## 🎈Survey 
+![Alt text](<WhatsApp Image 2023-11-17 at 13.54.52.jpeg>)
+![Alt text](<WhatsApp Image 2023-11-17 at 13.54.48 (1).jpeg>)
+![Alt text](<WhatsApp Image 2023-11-17 at 13.54.43.jpeg>)
+![Alt text](<WhatsApp Image 2023-11-17 at 13.54.45 (1).jpeg>)
+
+## 🔦Fitur 
+* **Dashboard**
+* **Admin**
+* **Ekspedisi**
+* **Kategori**
+* **Gender**
+* **Model**
+* **Busana**
+* **Bahan**
+* **Ukuran**
+* **Jenis**
+* **Barang**
+* **Barang Masuk**
+* **Barang Keluar**
+* **Laporan Barang Masuk**
+* **Laporan Barang Keluar**
+* **Profile**
 
 
-## Preview
+
+## ⌛Preview
 ![Alt text](image.png)
 ![Alt text](image-1.png)
 ![Alt text](image-2.png)
@@ -70,3 +94,13 @@ c) Proses yang akan dilakukan yaitu :
 ![Alt text](image-5.png)
 ![Alt text](image-6.png)
 ![Alt text](image-7.png)
+![Alt text](image-8.png)
+![Alt text](image-9.png)
+![Alt text](image-10.png)
+![Alt text](image-11.png)
+![Alt text](image-12.png)
+![Alt text](image-13.png)
+![Alt text](image-14.png)
+![Alt text](image-15.png)
+![Alt text](image-16.png)
+![Alt text](image-17.png)
