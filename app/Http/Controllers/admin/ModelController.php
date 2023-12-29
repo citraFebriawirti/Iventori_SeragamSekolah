@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barang;
 use App\Models\Models;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -50,9 +51,9 @@ class ModelController extends Controller
         ]);
 
         if ($create) {
-            return back()->with('success', 'Data Berhasil Ditambahkan');
+            return redirect()->route('model.index')->with('success', 'Data Berhasil Diubah');
         } else {
-            return back()->with('error', 'Data Gagal Ditambahkan');
+            return redirect()->route('model.index')->with('error', 'Data Gagal Diubah');
         }
     }
 
@@ -101,10 +102,16 @@ class ModelController extends Controller
      */
     public function destroy(string $id)
     {
-        if (Models::where('id_model', $id)->delete()) {
-            return redirect()->route('model.index')->with('success', 'Data Berhasil Dihapus');
+        $countBarang = Barang::where('id_model', $id)->count();
+
+        if ($countBarang > 0) {
+            return redirect()->back()->with('error', 'Tidak Bisa Dihapus Karena Data Sudah Digunakan');
         } else {
-            return redirect()->route('model.index')->with('error', 'Data Gagal Dihapus');
+            if (Models::where('id_model', $id)->delete()) {
+                return redirect()->route('model.index')->with('success', 'Data Berhasil Dihapus');
+            } else {
+                return redirect()->route('model.index')->with('error', 'Data Gagal Dihapus');
+            }
         }
     }
 }

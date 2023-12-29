@@ -15,6 +15,8 @@ class BarangKeluarController extends Controller
     public function index()
     {
         $data['barang_keluar'] = DB::table('tb_barang_keluar')->join('tb_barang', 'tb_barang_keluar.id_barang', '=', 'tb_barang.id_barang')->get();
+
+        $data['filter'] = 'false';
         return view('pages.halaman_admin.kelola_barang_keluar.index', $data);
     }
 
@@ -67,9 +69,9 @@ class BarangKeluarController extends Controller
 
 
         if ($create) {
-            return back()->with('success', 'Data Berhasil');
+            return redirect()->route('barang_keluar.index')->with('success', 'Data Berhasil Di Update');
         } else {
-            return back()->with('error', 'Data Gagal Ditambahkan');
+            return redirect()->route('barang_keluar.index')->with('error', 'Data Gagal Di Update');
         }
     }
 
@@ -112,11 +114,11 @@ class BarangKeluarController extends Controller
             ]
         );
 
-        $dataBarangMasukOld = DB::table('tb_barang_keluar')->where('id_barang_keluar', '=', $id)->first();
+        $dataBarangkeluarOld = DB::table('tb_barang_keluar')->where('id_barang_keluar', '=', $id)->first();
         $dataById = DB::table('tb_barang')->where('id_barang', '=', $request->id_barang)->first();
 
         if ($dataById) {
-            $jumlahBarangOld = $dataById->jumlah_barang - $dataBarangMasukOld->jumlah_barang_keluar;
+            $jumlahBarangOld = $dataById->jumlah_barang - $dataBarangkeluarOld->jumlah_barang_keluar;
 
             $jumlah_barang = $jumlahBarangOld - $request->jumlah_barang_keluar;
 
@@ -151,5 +153,22 @@ class BarangKeluarController extends Controller
         } else {
             return back()->with('error', 'Data Gagal Ditambahkan');
         }
+    }
+
+    public function filterBarangKeluar(Request $request)
+    {
+
+        $data['filter'] = 'true';
+
+        $tanggal_awal = $request->input('tanggal_awal');
+        $tanggal_akhir = $request->input('tanggal_akhir');
+
+        $data['tanggal_awal'] = $request->input('tanggal_awal');
+        $data['tanggal_akhir'] = $request->input('tanggal_akhir');
+
+
+        $data['barang_keluar'] = DB::table('tb_barang_keluar')->join('tb_barang', 'tb_barang_keluar.id_barang', '=', 'tb_barang.id_barang')->where('tb_barang_keluar.tanggal_barang_keluar', '>=', $tanggal_awal)->where('tb_barang_keluar.tanggal_barang_keluar', '<=', $tanggal_akhir)->get();
+
+        return view('pages.halaman_admin.kelola_barang_keluar.index', $data);
     }
 }

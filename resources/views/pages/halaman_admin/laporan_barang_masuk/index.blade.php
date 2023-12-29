@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>LAPORAN UJIAN</title>
+    <title>LAPORAN BARANG MASUK</title>
 </head>
 <style>
     .table {
@@ -40,6 +40,7 @@
 </style>
 
 <body>
+   
     <table style="width: 100%;">
         <tr style="background-color: white; border:none;">
 

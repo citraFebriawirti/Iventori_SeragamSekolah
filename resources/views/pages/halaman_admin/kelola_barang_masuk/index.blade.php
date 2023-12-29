@@ -31,36 +31,76 @@
                     </li>
                 </ol>
 
-                <div class="px-0 my-6 ml-[500px]">
-                    <a href="{{ route('laporanbarangmasuk.index') }}"
-                        class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-500 border border-transparent rounded-lg active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-purple">
-                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16m-7 6h7"></path>
-                        </svg>
+             
+            
+               
+            </div>
+          
+            <h2 for="tanggal_awal" class="mr-2 mt-5 font-medium" >Filter Tanggal</h2>
+          <div class="flex justify-between">
+            <div class="mb-10">
+                <form action="{{ route('filterBarangMasuk') }}" method="POST" class="">
+                    @csrf
+                   
+                   <div class="flex justify-center mt-2 ">
+                   
+                    <div class="flex items-center">
+                        
+                        <input type="date" name="tanggal_awal" id="tanggal_awal" value="{{ old('tanggal_awal') }}" class="border p-2" placeholder="Tanggal Awal">
+                    </div>
+                    <div class="flex items-center">
+                        <label for="tanggal_akhir" class="mx-2">S/d</label>
+                        <input type="date" name="tanggal_akhir" id="tanggal_akhir" value="{{ old('tanggal_akhir') }}" class="border p-2">
+                    </div>
+                    <button type="submit" class="bg-green-500 text-white p-2 rounded ml-6 px-6 opacity-75">Filter</button>
+                    @if($filter === 'true')
+                    <a href="filterBarangMasukTanggal/{{ $tanggal_awal }}/{{ $tanggal_akhir }}" class="bg-yellow-500 text-white p-2 rounded  ml-2" target="_blank">Laporan By Filter</a>
+                @endif
+                   
+                   </div>
+                 
+                </form>
+               
+            </div>
+            <div class="">
+               <div class="flex justify-center gap-10 ">
+                <div class="my-3" >
+                    <a href="{{ route('laporanbarangmasuk.index') }}" class="flex items-center justify-between w-full p-2 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-500 border border-transparent rounded-lg active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-purple">
+                       <div class="mr-3">
+                        <svg class="w-5 h-5 text-white-800 dark:text-white  " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z"/>
+                            <path d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z"/>
+                          </svg>
+                       </div>
                         Laporan
-                      
                     </a>
                 </div>
                 
-                <!-- Sisi kanan -->
-                <div class="px-6 my-6">
-                    <a href="{{ route('barang_masuk.create') }}"
-                        class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                <div class="my-3 ">
+                    <a href="{{ route('barang_masuk.create') }}" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                       <div class="mr-3">
+                        <svg class="w-[14px] h-[14px] text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                          </svg>
+                       </div>
                         Tambah
-                        <span class="ml-2" aria-hidden="true">+</span>
+                      
                     </a>
                 </div>
-
+               </div>
             </div>
+          </div>
+            
+            
+         
+            
 
-            @if (session('success'))
+            {{-- @if (session('success'))
                 <div class="alert alert-success p-3">{{ session('success') }}</div>
             @endif
             @if (session('error'))
                 <div class="alert alert-success p-3">{{ session('error') }}</div>
-            @endif
+            @endif --}}
 
             <table id="example" class="display border border-slate-200" style="width:100%">
                 <thead>

@@ -66,3 +66,11 @@ Route::resources([
     'laporanbarangkeluar' => LaporanBarangKeluar::class,
 
 ]);
+
+Route::post('filterBarangMasuk', [BarangMasukController::class, 'filterBarangMasuk'])->name('filterBarangMasuk');
+
+Route::get('filterBarangMasukTanggal/{tanggal_awal}/{tanggal_akhir}', [LaporanBarangMasuk::class, 'filterBarangMasukTanggal']);
+
+Route::post('filterBarangKeluar', [BarangKeluarController::class, 'filterBarangKeluar'])->name('filterBarangKeluar');
+
+Route::get('filterBarangKeluarTanggal/{tanggal_awal}/{tanggal_akhir}', [LaporanBarangKeluar::class, 'filterBarangKeluarTanggal']);

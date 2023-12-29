@@ -55,12 +55,12 @@
         <!-- component -->
         <section class="max-w-[990px] p-6 mx-auto bg-slate-100 rounded-md shadow-md dark:bg-gray-800 mt-10">
             <h1 class="text-xl font-bold text-slate-900 capitalize dark:text-slate-900">Tambah Data Kategori</h1>
-            @if (session('success'))
+            {{-- @if (session('success'))
                 <div class="alert alert-success p-3">{{ session('success') }}</div>
             @endif
             @if (session('error'))
                 <div class="alert alert-success p-3">{{ session('error') }}</div>
-            @endif
+            @endif --}}
             <form action="{{ route('kategori.store') }}" method="post" enctype="multipart/form-data">
                 <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                     @csrf

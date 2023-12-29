@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barang;
 use App\Models\Busana;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -50,9 +51,9 @@ class BusanaController extends Controller
         ]);
 
         if ($create) {
-            return back()->with('success', 'Data Berhasil Ditambahkan');
+            return redirect()->route('busana.index')->with('success', 'Data Berhasil Diubah');
         } else {
-            return back()->with('error', 'Data Gagal Ditambahkan');
+            return redirect()->route('busana.index')->with('error', 'Data Gagal Diubah');
         }
     }
 
@@ -101,10 +102,17 @@ class BusanaController extends Controller
      */
     public function destroy(string $id)
     {
-        if (Busana::where('id_busana', $id)->delete()) {
-            return redirect()->route('busana.index')->with('success', 'Data Berhasil Dihapus');
+
+        $countBarang = Barang::where('id_busana', $id)->count();
+
+        if ($countBarang > 0) {
+            return redirect()->back()->with('error', 'Tidak Bisa Dihapus Karena Data Sudah Digunakan');
         } else {
-            return redirect()->route('busana.index')->with('error', 'Data Gagal Dihapus');
+            if (Busana::where('id_busana', $id)->delete()) {
+                return redirect()->route('busana.index')->with('success', 'Data Berhasil Dihapus');
+            } else {
+                return redirect()->route('busana.index')->with('error', 'Data Gagal Dihapus');
+            }
         }
     }
 }

@@ -35,19 +35,24 @@
                 <div class="px-6 my-6">
                     <a href="{{ route('jenis.create') }}"
                         class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                        <div class="mr-3">
+                            <svg class="w-[14px] h-[14px] text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                              </svg>
+                           </div>
                         Tambah
-                        <span class="ml-2" aria-hidden="true">+</span>
+                      
                     </a>
                 </div>
 
             </div>
 
-            @if (session('success'))
+            {{-- @if (session('success'))
                 <div class="alert alert-success p-3">{{ session('success') }}</div>
             @endif
             @if (session('error'))
                 <div class="alert alert-success p-3">{{ session('error') }}</div>
-            @endif
+            @endif --}}
 
             <table id="example" class="display border border-slate-200" style="width:100%">
                 <thead>

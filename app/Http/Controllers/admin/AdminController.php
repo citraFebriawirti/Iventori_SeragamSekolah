@@ -72,11 +72,10 @@ class AdminController extends Controller
             'gambar_admin' => $gambar_admin
         ]);
 
-
         if ($create) {
-            return back()->with('success', 'Data Berhasil');
+            return redirect()->route('admin.index')->with('success', 'Data Berhasil Di Update');
         } else {
-            return back()->with('error', 'Data Gagal Ditambahkan');
+            return redirect()->route('admin.index')->with('error', 'Data Gagal Di Update');
         }
     }
 

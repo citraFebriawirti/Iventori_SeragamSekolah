@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bahan;
+use App\Models\Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Console\View\Components\Alert;
@@ -54,9 +55,9 @@ class BahanController extends Controller
         ]);
 
         if ($create) {
-            return back()->with('success', 'Data Berhasil Ditambahkan');
+            return redirect()->route('bahan.index')->with('success', 'Data Berhasil Diubah');
         } else {
-            return back()->with('error', 'Data Gagal Ditambahkan');
+            return redirect()->route('bahan.index')->with('error', 'Data Gagal Diubah');
         }
     }
 
@@ -105,10 +106,18 @@ class BahanController extends Controller
      */
     public function destroy(string $id)
     {
-        if (Bahan::where('id_bahan', $id)->delete()) {
-            return redirect()->route('bahan.index')->with('success', 'Data Berhasil Dihapus');
+
+        $countBarang = Barang::where('id_bahan', $id)->count();
+
+        if ($countBarang > 0) {
+            return redirect()->back()->with('error', 'Tidak Bisa Dihapus Karena Data Sudah Digunakan');
         } else {
-            return redirect()->route('bahan.index')->with('error', 'Data Gagal Dihapus');
+
+            if (Bahan::where('id_bahan', $id)->delete()) {
+                return redirect()->route('bahan.index')->with('success', 'Data Berhasil Dihapus');
+            } else {
+                return redirect()->route('bahan.index')->with('error', 'Data Gagal Dihapus');
+            }
         }
     }
 }

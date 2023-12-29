@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barang;
 use App\Models\Gender;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -101,10 +102,16 @@ class GenderController extends Controller
      */
     public function destroy(string $id)
     {
-        if (Gender::where('id_gender', $id)->delete()) {
-            return redirect()->route('gender.index')->with('success', 'Data Berhasil Dihapus');
+        $countBarang = Barang::where('id_gender', $id)->count();
+
+        if ($countBarang > 0) {
+            return redirect()->back()->with('error', 'Tidak Bisa Dihapus Karena Data Sudah Digunakan');
         } else {
-            return redirect()->route('gender.index')->with('error', 'Data Gagal Dihapus');
+            if (Gender::where('id_gender', $id)->delete()) {
+                return redirect()->route('gender.index')->with('success', 'Data Berhasil Dihapus');
+            } else {
+                return redirect()->route('gender.index')->with('error', 'Data Gagal Dihapus');
+            }
         }
     }
 }

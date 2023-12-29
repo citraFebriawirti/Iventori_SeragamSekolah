@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BarangMasuk;
 use App\Models\Ekspedisi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -76,9 +77,9 @@ class EkspedisiController extends Controller
 
 
         if ($create) {
-            return back()->with('success', 'Data Berhasil');
+            return redirect()->route('ekspedisi.index')->with('success', 'Data Berhasil Di Update');
         } else {
-            return back()->with('error', 'Data Gagal Ditambahkan');
+            return redirect()->route('ekspedisi.index')->with('error', 'Data Gagal Di Update');
         }
     }
 
@@ -152,10 +153,16 @@ class EkspedisiController extends Controller
      */
     public function destroy(string $id)
     {
-        if (Ekspedisi::where('id_ekspedisi', '=', $id)->delete()) {
-            return back()->with('success', 'Data Berhasil');
+        $countBarangMasuk = BarangMasuk::where('id_ekspedisi', $id)->count();
+
+        if ($countBarangMasuk > 0) {
+            return redirect()->back()->with('error', 'Tidak Bisa Dihapus Karena Data Sudah Digunakan');
         } else {
-            return back()->with('error', 'Data Gagal Ditambahkan');
+            if (Ekspedisi::where('id_ekspedisi', '=', $id)->delete()) {
+                return back()->with('success', 'Data Berhasil');
+            } else {
+                return back()->with('error', 'Data Gagal Ditambahkan');
+            }
         }
     }
 }

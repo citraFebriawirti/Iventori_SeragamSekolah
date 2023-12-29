@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barang;
 use App\Models\Ukuran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -50,9 +51,9 @@ class UkuranController extends Controller
         ]);
 
         if ($create) {
-            return back()->with('success', 'Data Berhasil Ditambahkan');
+            return redirect()->route('ukuran.index')->with('success', 'Data Berhasil Diubah');
         } else {
-            return back()->with('error', 'Data Gagal Ditambahkan');
+            return redirect()->route('ukuran.index')->with('error', 'Data Gagal Diubah');
         }
     }
 
@@ -101,10 +102,17 @@ class UkuranController extends Controller
      */
     public function destroy(string $id)
     {
-        if (Ukuran::where('id_ukuran', $id)->delete()) {
-            return redirect()->route('ukuran.index')->with('success', 'Data Berhasil Dihapus');
+
+        $countBarang = Barang::where('id_ukuran', $id)->count();
+
+        if ($countBarang > 0) {
+            return redirect()->back()->with('error', 'Tidak Bisa Dihapus Karena Data Sudah Digunakan');
         } else {
-            return redirect()->route('ukuran.index')->with('error', 'Data Gagal Dihapus');
+            if (Ukuran::where('id_ukuran', $id)->delete()) {
+                return redirect()->route('ukuran.index')->with('success', 'Data Berhasil Dihapus');
+            } else {
+                return redirect()->route('ukuran.index')->with('error', 'Data Gagal Dihapus');
+            }
         }
     }
 }

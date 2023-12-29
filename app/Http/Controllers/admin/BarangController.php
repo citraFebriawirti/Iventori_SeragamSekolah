@@ -107,9 +107,9 @@ class BarangController extends Controller
 
 
         if ($create) {
-            return back()->with('success', 'Data Berhasil');
+            return redirect()->route('barang.index')->with('success', 'Data Berhasil Di Update');
         } else {
-            return back()->with('error', 'Data Gagal Ditambahkan');
+            return redirect()->route('barang.index')->with('error', 'Data Gagal Di Update');
         }
     }
 

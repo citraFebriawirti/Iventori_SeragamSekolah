@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barang;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -50,9 +51,9 @@ class KategoriController extends Controller
         ]);
 
         if ($create) {
-            return back()->with('success', 'Data Berhasil Ditambahkan');
+            return redirect()->route('kategori.index')->with('success', 'Data Berhasil Di Ditambahkan');
         } else {
-            return back()->with('error', 'Data Gagal Ditambahkan');
+            return redirect()->route('kategori.index')->with('error', 'Data Gagal Ditambahkan');
         }
     }
 
@@ -101,10 +102,18 @@ class KategoriController extends Controller
      */
     public function destroy(string $id)
     {
-        if (Kategori::where('id_kategori', $id)->delete()) {
-            return redirect()->route('kategori.index')->with('success', 'Data Berhasil Dihapus');
+        // Menggunakan count untuk memeriksa jumlah data yang menggunakan kategori
+        $countBarang = Barang::where('id_kategori', $id)->count();
+
+        if ($countBarang > 0) {
+            return redirect()->back()->with('error', 'Tidak Bisa Dihapus Karena Data Sudah Digunakan');
         } else {
-            return redirect()->route('kategori.index')->with('error', 'Data Gagal Dihapus');
+            // Menghapus kategori jika tidak digunakan oleh barang
+            if (Kategori::where('id_kategori', $id)->delete()) {
+                return redirect()->route('kategori.index')->with('success', 'Data Berhasil Dihapus');
+            } else {
+                return redirect()->route('kategori.index')->with('error', 'Data Gagal Dihapus');
+            }
         }
     }
 }
