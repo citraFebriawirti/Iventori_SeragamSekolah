@@ -15,7 +15,9 @@ return new class extends Migration
             $table->string('id_barang_masuk')->primary()->unique();
             $table->string('id_barang')->nullable();
             $table->string('id_ekspedisi')->nullable();
+
             $table->integer('jumlah_barang_masuk')->nullable();
+
             $table->date('tanggal_barang_masuk')->nullable();
             $table->timestamps();
         });

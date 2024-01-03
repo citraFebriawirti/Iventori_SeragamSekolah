@@ -18,6 +18,7 @@ class BarangMasuk extends Model
         'id_barang',
         'id_ekspedisi',
         'tanggal_barang_masuk',
+        'harga_barang_masuk',
         'jumlah_barang_masuk',
 
     ];

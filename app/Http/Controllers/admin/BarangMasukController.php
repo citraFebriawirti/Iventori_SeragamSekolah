@@ -43,12 +43,14 @@ class BarangMasukController extends Controller
                 'id_ekspedisi' => 'required',
 
                 'jumlah_barang_masuk' => 'required',
+                'harga_barang_masuk' => 'required',
                 'tanggal_barang_masuk' => 'required',
             ],
 
             [
                 'id_barang.required' => 'Wajib diisi',
                 'id_ekspedisi.required' => 'Wajib diisi',
+                'harga_barang_masuk.required' => 'vvv diisi',
                 'jumlah_barang_masuk.required' => 'Wajib diisi',
                 'tanggal_barang_masuk.required' => 'Wajib diisi',
             ]
@@ -68,6 +70,7 @@ class BarangMasukController extends Controller
             'id_ekspedisi' => $request->id_ekspedisi,
 
             'jumlah_barang_masuk' => $request->jumlah_barang_masuk,
+            'harga_barang_masuk' => $request->harga_barang_masuk,
             'tanggal_barang_masuk' => $request->tanggal_barang_masuk,
 
         ]);
@@ -112,6 +115,7 @@ class BarangMasukController extends Controller
                 'id_barang' => 'required',
                 'id_ekspedisi' => 'required',
                 'jumlah_barang_masuk' => 'required',
+                'harga_barang_masuk' => 'required',
                 'tanggal_barang_masuk' => 'required',
             ],
 
@@ -119,6 +123,7 @@ class BarangMasukController extends Controller
                 'id_barang.required' => 'Wajib diisi',
                 'id_ekspedisi.required' => 'Wajib diisi',
                 'jumlah_barang_masuk.required' => 'Wajib diisi',
+                'harga_barang_masuk.required' => 'Wajib diisi',
                 'tanggal_barang_masuk.required' => 'Wajib diisi',
             ]
         );
@@ -139,6 +144,7 @@ class BarangMasukController extends Controller
                 'id_barang' => $request->id_barang,
                 'id_ekspedisi' => $request->id_ekspedisi,
                 'jumlah_barang_masuk' => $request->jumlah_barang_masuk,
+                'harga_barang_masuk' => $request->harga_barang_masuk,
                 'tanggal_barang_masuk' => $request->tanggal_barang_masuk,
 
             ]);

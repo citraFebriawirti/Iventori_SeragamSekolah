@@ -108,6 +108,7 @@
                         <th class="border border-slate-200 text-center">No</th>
                         <th class="border border-slate-200 text-center">Nama Barang</th>
                         <th class="border border-slate-200  text-center">Jumlah</th>
+                        <th class="border border-slate-200 text-center">Harga Per Item</th>
                         <th class="border border-slate-200  text-center">Tanggal Masuk</th>
                         <th class="border border-slate-200 text-center">Nama Ekspedisi</th>
                       
@@ -127,6 +128,9 @@
                             </td>
                             <td class="border border-slate-200 whitespace-pre-line text-center">
                                 {{ $baris->jumlah_barang_masuk }}
+                            </td>
+                            <td class="border border-slate-200 whitespace-pre-line text-center">
+                                Rp {{ number_format($baris->harga_barang_masuk, 0, ',', '.') }}
                             </td>
 
                             <td class="border border-slate-200 whitespace-pre-line text-center">

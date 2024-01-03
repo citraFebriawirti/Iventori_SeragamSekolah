@@ -20,9 +20,10 @@ return new class extends Migration
             $table->string('id_bahan')->nullable();
             $table->string('id_ukuran')->nullable();
             $table->string('id_jenis')->nullable();
+            // $table->string('id_barang_masuk')->nullable();
             $table->string('nama_barang')->nullable();
             $table->integer('jumlah_barang')->nullable();
-            $table->integer('harga_barang')->nullable();
+
             $table->string('gambar_barang')->nullable();
             $table->timestamps();
         });

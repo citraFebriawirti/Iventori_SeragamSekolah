@@ -61,7 +61,7 @@
                         <th class="border border-slate-200  text-center">Gambar</th>
                         <th class="border border-slate-200 text-center">Nama</th>
                         <th class="border border-slate-200  text-center">Jumlah</th>
-                        <th class="border border-slate-200 text-center">Harga Per Item</th>
+                        {{-- <th class="border border-slate-200 text-center">Harga Per Item</th> --}}
                         <th class="border border-slate-200  text-center">Kategori</th>
                         <th class="border border-slate-200  text-center">Gender</th>
                         <th class="border border-slate-200  text-center">Model</th>
@@ -91,9 +91,9 @@
                             <td class="border border-slate-200 whitespace-pre-line text-center">
                                 {{ $baris->jumlah_barang }}
                             </td>
-                            <td class="border border-slate-200 whitespace-pre-line text-center">
-                                Rp {{ number_format($baris->harga_barang, 0, ',', '.') }}
-                            </td>
+                            {{-- <td class="border border-slate-200 whitespace-pre-line text-center">
+                                Rp {{ number_format($baris->harga_barang_masuk, 0, ',', '.') }}
+                            </td> --}}
                             
                             <td class="border border-slate-200 text-center">{{ $baris->nama_kategori }}</td>
                             {{-- <td class="border border-slate-200 text-center">

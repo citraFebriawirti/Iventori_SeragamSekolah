@@ -25,7 +25,7 @@ class LaporanBarangKeluar extends Controller
         $data['jumlahBarangKeluar'] = DB::table('tb_barang_keluar')->join('tb_barang', 'tb_barang_keluar.id_barang', '=', 'tb_barang.id_barang')->sum('jumlah_barang_keluar');
 
 
-        $data['hargaBarangKeluar'] = DB::table('tb_barang_keluar')->join('tb_barang', 'tb_barang_keluar.id_barang', '=', 'tb_barang.id_barang')->sum('harga_barang');
+        $data['hargaBarangKeluar'] = DB::table('tb_barang_keluar')->join('tb_barang', 'tb_barang_keluar.id_barang', '=', 'tb_barang.id_barang')->sum('harga_barang_masuk');
 
         $pdf = PDF::loadview('pages.halaman_admin.laporan_barang_keluar.index', $data);
         return $pdf->stream();
@@ -90,7 +90,7 @@ class LaporanBarangKeluar extends Controller
 
         $data['jumlahBarangKeluar'] = DB::table('tb_barang_keluar')->join('tb_barang', 'tb_barang_keluar.id_barang', '=', 'tb_barang.id_barang')->where('tb_barang_keluar.tanggal_barang_keluar', '<=', $tanggal_akhir)->sum('jumlah_barang_keluar');
 
-        $data['hargaBarangKeluar'] = DB::table('tb_barang_keluar')->join('tb_barang', 'tb_barang_keluar.id_barang', '=', 'tb_barang.id_barang')->where('tb_barang_keluar.tanggal_barang_keluar', '<=', $tanggal_akhir)->sum('harga_barang');
+        $data['hargaBarangKeluar'] = DB::table('tb_barang_keluar')->join('tb_barang', 'tb_barang_keluar.id_barang', '=', 'tb_barang.id_barang')->where('tb_barang_keluar.tanggal_barang_keluar', '<=', $tanggal_akhir)->sum('harga_barang_masuk');
 
         $pdf = PDF::loadview('pages.halaman_admin.laporan_barang_keluar.index', $data);
         return $pdf->stream();

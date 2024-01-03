@@ -23,9 +23,10 @@ class Barang extends Model
         'id_bahan',
         'id_ukuran',
         'id_jenis',
+        // 'id_barang_masuk',
         'nama_barang',
         'jumlah_barang',
-        'harga_barang',
+
         'gambar_barang',
 
     ];

@@ -105,7 +105,7 @@
                         {{ $baris->jumlah_barang_masuk }}
                     </td>
                     <td class="border border-slate-200 whitespace-pre-line text-center">
-                        Rp {{ number_format($baris->harga_barang, 0, ',', '.') }}
+                        Rp {{ number_format($baris->harga_barang_masuk, 0, ',', '.') }}
                     </td>
                     
                    

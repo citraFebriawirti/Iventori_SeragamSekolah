@@ -24,7 +24,7 @@ class LaporanBarangMasuk extends Controller
 
         $data['jumlahBarangMasuk'] = DB::table('tb_barang_masuk')->join('tb_barang', 'tb_barang_masuk.id_barang', '=', 'tb_barang.id_barang')->join('tb_ekspedisi', 'tb_barang_masuk.id_ekspedisi', '=', 'tb_ekspedisi.id_ekspedisi')->sum('jumlah_barang_masuk');
 
-        $data['hargaBarangMasuk'] = DB::table('tb_barang_masuk')->join('tb_barang', 'tb_barang_masuk.id_barang', '=', 'tb_barang.id_barang')->join('tb_ekspedisi', 'tb_barang_masuk.id_ekspedisi', '=', 'tb_ekspedisi.id_ekspedisi')->sum('harga_barang');
+        $data['hargaBarangMasuk'] = DB::table('tb_barang_masuk')->join('tb_barang', 'tb_barang_masuk.id_barang', '=', 'tb_barang.id_barang')->join('tb_ekspedisi', 'tb_barang_masuk.id_ekspedisi', '=', 'tb_ekspedisi.id_ekspedisi')->sum('harga_barang_masuk');
 
         $pdf = PDF::loadview('pages.halaman_admin.laporan_barang_masuk.index', $data);
         return $pdf->stream();
@@ -90,7 +90,7 @@ class LaporanBarangMasuk extends Controller
 
         $data['jumlahBarangMasuk'] = DB::table('tb_barang_masuk')->join('tb_barang', 'tb_barang_masuk.id_barang', '=', 'tb_barang.id_barang')->join('tb_ekspedisi', 'tb_barang_masuk.id_ekspedisi', '=', 'tb_ekspedisi.id_ekspedisi')->where('tb_barang_masuk.tanggal_barang_masuk', '<=', $tanggal_akhir)->sum('jumlah_barang_masuk');
 
-        $data['hargaBarangMasuk'] = DB::table('tb_barang_masuk')->join('tb_barang', 'tb_barang_masuk.id_barang', '=', 'tb_barang.id_barang')->join('tb_ekspedisi', 'tb_barang_masuk.id_ekspedisi', '=', 'tb_ekspedisi.id_ekspedisi')->where('tb_barang_masuk.tanggal_barang_masuk', '<=', $tanggal_akhir)->sum('harga_barang');
+        $data['hargaBarangMasuk'] = DB::table('tb_barang_masuk')->join('tb_barang', 'tb_barang_masuk.id_barang', '=', 'tb_barang.id_barang')->join('tb_ekspedisi', 'tb_barang_masuk.id_ekspedisi', '=', 'tb_ekspedisi.id_ekspedisi')->where('tb_barang_masuk.tanggal_barang_masuk', '<=', $tanggal_akhir)->sum('harga_barang_masuk');
 
         $pdf = PDF::loadview('pages.halaman_admin.laporan_barang_masuk.index', $data);
         return $pdf->stream();
